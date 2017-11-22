@@ -61,14 +61,14 @@ class GereTypeLogement {
      // }
       //return $resultat;
       //pour les tests :
-      $_SESSION['tabTest'] = array();
+      /*$_SESSION['tabTest'] = array();
       array_push($_SESSION['tabTest'] ,$idannonce);
       array_push($_SESSION['tabTest'] ,$_REQUEST['typeAnnonce']);
       array_push($_SESSION['tabTest'] ,$nbrPieces);
       array_push($_SESSION['tabTest'] ,$position);
       array_push($_SESSION['tabTest'] ,$isAnimauxPermis);
       array_push($_SESSION['tabTest'] ,$inclus);
-      array_push($_SESSION['tabTest'] ,$infos);
+      array_push($_SESSION['tabTest'] ,$infos);*/
   }
 
   public static function creerUneAnnonceMaison($idannonce, $typeAnnonce) {
@@ -79,10 +79,10 @@ class GereTypeLogement {
         UNSET($_SESSION["messageErreurCreationCompte"]);
       }*/
       if(ISSET($_REQUEST['nbrCh']))  $nbrChambres = $_REQUEST['nbrCh'];
-        else $nbrPieces = "null";
+        else $nbrChambres = "null";
 
       $inclus = "";
-      //$tabInclus = $_REQUEST['IncludeApt'];
+      $tabInclus = $_REQUEST['IncludeApt'];
       if(!isset($_REQUEST['includeMaison']) || empty($_REQUEST['includeMaison']))   $inclus = "null";
         else
           {
@@ -115,13 +115,11 @@ class GereTypeLogement {
      // }
       //return $resultat;
       //pour les tests :
-      $_SESSION['tabTest'] = array();
+      /*$_SESSION['tabTest'] = array();
       array_push($_SESSION['tabTest'] ,$idannonce);
       array_push($_SESSION['tabTest'] ,$_REQUEST['typeAnnonce']);
       array_push($_SESSION['tabTest'] ,$nbrChambres);
       array_push($_SESSION['tabTest'] ,$inclus);
-      array_push($_SESSION['tabTest'] ,$infos);
+      array_push($_SESSION['tabTest'] ,$infos);*/
   }
-
-
 }

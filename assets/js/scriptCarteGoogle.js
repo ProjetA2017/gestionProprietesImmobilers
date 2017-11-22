@@ -8,7 +8,7 @@ function initMap() {
 
     downloadUrl('?action=chargerMarkersCarte', function(data) {
         var xml = data.responseXML;
-        alert(xml);
+        alert(xml);//TODO : Enlever
         var markers = xml.documentElement.getElementsByTagName('marker');
         Array.prototype.forEach.call(markers, function(markerElem) {
             var name = markerElem.getAttribute('name');
@@ -19,7 +19,7 @@ function initMap() {
                 parseFloat(markerElem.getAttribute('lng')));
             var getpath=markerElem.getAttribute('path');// pour obtenir le path pour l image
             var infowincontent = document.createElement('div');
-            alert(markers);
+            alert(markers);//TODO : Enlever
             var textprix= document.createElement('strong');
             textprix.style.color='#f12b4a';
             textprix.fontWeight = "bolder";
@@ -66,7 +66,7 @@ function initMap() {
             });
             marker.addListener('click',function() {
                 infoWindow.close(map, marker);
-                document.getElementById("message").innerHTML = "<style>label{ color:darkblue} img{ width: 400px; height: 400px }</style><label >Propietaire :</label> <strong>" + name + "</strong>" + "<br>" +
+                document.getElementById("message").innerHTML = "<style>label{ color:darkblue} #toto img{ width: 400px; height: 400px; position:relative; }</style><label >Propietaire :</label> <strong>" + name + "</strong>" + "<br>" +
                     "<label>Adresse :</label> <strong>" + address + "</strong><br><img src=" + getpath + " >";
 
             });

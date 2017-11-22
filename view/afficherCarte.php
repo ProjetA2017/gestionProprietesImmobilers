@@ -31,9 +31,9 @@
         </div>
     </div>
     <!--span style="width:1px;">e</span-->
-    <div class="col-lg-4 col-sx-12" style=" margin:0 0 0 0; width:34%; border:1px red solid; ">
+    <div id="toto" class="col-lg-4 col-sx-12" style=" margin:0 0 0 0; width:34%;">
         <div class="title"><span>Aperçu :</span></div>
-        <div id="message" class="message"></div>
+        <div id="message" class="message" style="postion:absolute;"></div>
     </div>
 </div>
 

@@ -22,7 +22,7 @@ class GereAnnonce {
       $typeAnnonce =$_REQUEST['typeAnnonce'];
       $typeLogement =$_REQUEST['typelogement'];
       $idannonce = $idannonceur."-".$typeLogement."-".$lat."-".$long;
-      $resultat = TRUE;
+      //$resultat = TRUE;
       /*if ($identifiant == "") {
           $_SESSION["messageErreurCreationCompte"]["identifiant"] = "Identifiant obligatoire";
           $resultat = FALSE;
@@ -57,7 +57,7 @@ class GereAnnonce {
           array_push($_SESSION['tabTest'] ,$typeLogement);
       }
 
-      if ($typeLogement == 'appartement'){
+      if ($typeLogement == 'bureaux'){
           GereTypeLogement::creerUneAnnonceBureaux($idannonce, $typeAnnonce);
           array_push($_SESSION['tabTest'] ,$typeLogement);
       }
