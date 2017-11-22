@@ -142,7 +142,7 @@
                }
                else
                {
-                 echo '<button class="btn btn-info" data-toggle="modal" data-target="#logoutpop">Se deconnecter</button>';
+                 //echo '<button class="btn btn-info" data-toggle="modal" data-target="#logoutpop">Se deconnecter</button>';
                  echo '<button type="submit" class="btn btn-info"  onclick="window.location.href=\'?action=formulaireAnnonce\'">Créer une annonce</button>';
                }
           ?>
@@ -152,17 +152,19 @@
   </div>
 </div>
 <!-- end banner -->
-
+  <!--div class="pull-right viewal" style="padding-bottom: 10px; border:1px yellow solid;margin-right:50px;">
+    <a href="?action=pageChercher" style="border:1px red solid;">Voir l'ensemble de la liste</a>
+    <a href="?action=pageChercher" style="border:1px blue solid;">Voir l'ensemble de la liste</a>
+  </div-->
 
 <div class="container">
-  <div class= "properties-listing spacer">
+  <div class="properties-listing spacer">
     <div class="pull-right viewall">
-  <div style = "margin-right:10px;">
+      <div style="margin-right: 10px;">
     <a href="?action=afficherCarte"  id="spcTest"><span class="glyphicon glyphicon-map-marker" style="font-size: 1.6em; margin-right: 10px;"></span></a>
-        <a href="?action=pageChercher"  id="spcTest"><span class="glyphicon glyphicon-list" style="font-size: 1.6em;"></span></a>
-      </div>
-    </div>
-
+    <a href="?action=pageChercher"  id="spcTest"><span class="glyphicon glyphicon-list" style="font-size: 1.6em;"></span></a>
+  </div>
+  </div>
     <h2>Présentation des propriétés</h2>
     <div id="owl-example" class="owl-carousel">
       <div class="properties">
@@ -316,27 +318,7 @@
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="assets/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/js/barrePrix.js"></script>
 
-<script>
-var $j = $.noConflict();
-$j( function() {
-    $j( "#slider-range" ).slider({
-      range: true,
-      min: 0,
-      max: 1200,
-      values: [ 75, 300 ],
-      slide: function( event, ui ) {
-        $j( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-        $j("#inputPrix").val(ui.values[0]);
-        $j("#inputPrix2").val(ui.values[1]);
-      }
-
-    });
-    $j( "#amount" ).val( "$" + $j( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $j( "#slider-range" ).slider( "values", 1 ) );
-  } );
-
-
-</script>
 <?php include'footer.php';?>

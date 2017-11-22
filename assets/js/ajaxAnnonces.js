@@ -11,6 +11,8 @@ function init() {
 
     });
 }
+
+/*
 document.getElementById("bCreationAnnonce").addEventListener("click", ajouterAnnonce);
 function ajouterAnnonce() {
     var lat = document.getElementById('lat').value;
@@ -26,7 +28,7 @@ function ajouterAnnonce() {
     console.log(lat);
     console.log(long);
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "?action=creerAnnonceAjax",
         data: "latitude="+lat+"&longitude="+long+"&identifiant="+identifiant+"&prenom="+prenom+"&nom="+nomfamille+"&adresse="+adresse+"&prix="+prix+"&typeannonce="+typeannonce+"&typelogement="+ typelogement,
         success: function (result) {
@@ -35,4 +37,4 @@ function ajouterAnnonce() {
         error: function (data) {
         }
     });
-}
+}*/

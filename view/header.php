@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
  	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" />
-  <link rel="stylesheet" href="assets/style.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
 
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.js"></script>
-  <script src="assets/script.js"></script>
+  <script src="assets/js/scriptSlide.js"></script>
 
 <!-- -->
   <link rel="stylesheet" href="assets/jquery-ui-1.12.1.custom/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
+
 
 
 <!-- Owl stylesheet -->
@@ -36,75 +37,16 @@
 <link rel="stylesheet" type="text/css" href="assets/slider/slider/css/slider.css"/>
 <script type="text/javascript" src="assets/slider/slider/js/bootstrap-slider.js"></script>
 
-
-
 <!-- PARTIE GILBERTO ////////////////////////////////////////////////////////////////////////////////////////////////// -->
-<!-- 1 Creation annonces -->
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
-    <!-- Include JS File Here -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTBYRZ3zAUQ81jl-x8Y8J14WqVIP4Es9g&libraries=places"></script>
 
-    <!-- Include JS File Here -->
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTBYRZ3zAUQ81jl-x8Y8J14WqVIP4Es9g&libraries=places"></script>
-    <style>label{ color:darkblue
-            }</style>
-    <!-- <script src="assets/js/ajaxAnnonces.js"></script>-->
+<!-- 2 DropZone -->
+<link href="assets/css/dropzone.css" type="text/css" rel="stylesheet" />
 
-<!-- fichier faisant disparaitre le slide
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
--->
-
-    <!-- 2 DropZone -->
-    <link href="dropzone.css" type="text/css" rel="stylesheet" />
-    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
-
-
-
-    <style>
-    .containerImage{
-        width: 800px;
-        height:300px;
-        margin:30px auto;
-    }
-    .dropzone .dz-preview .dz-image{
-        border :3px dashed lightcoral;
-        font-weight:500;
-        width: 250px;
-        height: 250px;
-        position: relative;
-    }
-
-/*----------------- Partie map -----------------------*/
-    #map {
-
-        height: 80%;
-        width: 70%;
-        float:left;
-      margin: 30px 30px 30px 30px;
-        border: 5px solid darkkhaki;
-
-    }
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-
-        height: 100%;
-        margin: 0;
- }
-.title{
-    padding-top: 40px;
-    position:relative;
-    text-align:center;
-}
-
-/*----------------- Partie map -----------------------*/
-</style>
-
-
-
-
+<!-- Css ajouté par Yang -->
+<link rel="stylesheet" type="text/css" href="assets/css/styleYang.css">
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-
 
 </head>
 
@@ -143,24 +85,44 @@
           </div>
         </div>
 
-    </div>
+</div>
 <!-- #Header Starts -->
 
 <div class="container">
 
 <!-- Header Starts -->
-<div class="header">
-<a href="index.php"><img src="images/logo1.png" alt="Realestate"></a>
+  <div class="header">
+    <a href="index.php"><img src="images/logo1.png" alt="Realestate"></a>
+    <ul class="pull-right">
+      <li><a href="buysalerent.php">Acheter</a></li>
+      <!--<li><a href="buysalerent.php">Vendre</a></li>-->
+      <li><a href="buysalerent.php">Louer</a></li>
+      <li>
+      <div class="dropdown">
+        <div data-toggle="dropdown">
+          <?php
+          if (ISSET($_SESSION["connected"])) {
+          ?>
+            <a href="#" style="text-decoration:none;"><span class="glyphicon glyphicon-user"></span>
+          <?php
+            echo $_SESSION["connected"];
+          ?>
+            <span class="caret">
+            </a>
+          <?php
+          }
+          ?>
 
-              <ul class="pull-right">
-                <li><a href="buysalerent.php">Acheter</a></li>
-                <li><a href="buysalerent.php">Vendre</a></li>
-                <li><a href="buysalerent.php">Louer</a></li>
-                <?php
-                     if (ISSET($_SESSION["connected"]))
-                         {echo '<li><a href="#">Bienvenu  '.$_SESSION["connected"].'</a></li>';}
-                ?>
-              </ul>
-</div>
+        </div>
+        <ul class="dropdown-menu" style="margin: 0px 0px; min-width: 0px;">
+          <li style="padding:5px 5px 0px 5px; margin-bottom: 0px;" ><a href="?action=updateProfile" style="font-size:15px;">Éditer profile</a></li>
+          <li style="padding:5px 5px 0px 5px; margin-bottom: 0px;" ><a href="?action=updateMotDePasse" style="font-size:15px;">Modifier mot de passe</a></li>
+          <li style="padding:5px 5px 0px 5px; margin-bottom: 0px;" ><a href="?action=deconnection" style="font-size:15px;">Se déconnecter</a></li>
+        </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+
 <!-- #Header Starts -->
 </div>

@@ -1,0 +1,70 @@
+/* Css ajouté par Yang */
+#btnPersonnalise {
+	background:#5cb85c;
+	color:white;
+
+}
+
+#panelBody {
+	padding-bottom: 0px;
+}
+
+
+/*  Disposition Inline de la barre de recherche   */
+#dispoInline {
+	margin-top: 20px;
+}
+
+#dispoInline div {
+	margin-right: 20px;
+}
+
+#dispoInline button {
+	margin-bottom: 20px;
+	position: relative;
+
+}
+
+#dispoInline :nth-child(3) {
+	font-size: 1.5em;
+}
+
+#dispoInline :nth-child(2) div {
+	width: 31em;
+}
+
+div label .radioInline {
+	float: right;
+}
+
+/*Ajout de Dris : Styles déplacés du header*/
+.containerImage {
+		width: 800px;
+		height:300px;
+		margin:30px auto;
+}
+
+.dropzone .dz-preview .dz-image{
+		border :3px dashed lightcoral;
+		font-weight:500;
+		width: 250px;
+		height: 250px;
+		position: relative;
+}
+
+#map {
+		height: 40em;
+		border: 5px solid darkkhaki;
+		width: auto;
+		margin-bottom: 15px;
+		min-width: 25em;
+}
+
+.title{
+		padding-top: 40px;
+		text-align:center;
+}
+
+label {
+	color:darkblue
+}

@@ -1,111 +1,50 @@
 <?php include'header.php';?>
 
-<script>
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: new google.maps.LatLng(45.50884, -73.58781),
-            zoom: 10
-
-        });
-        var infoWindow = new google.maps.InfoWindow;
-
-        downloadUrl('?action=chargerMarkersCarte', function(data) {
-            var xml = data.responseXML;
-            alert(xml);
-            var markers = xml.documentElement.getElementsByTagName('marker');
-            Array.prototype.forEach.call(markers, function(markerElem) {
-                var name = markerElem.getAttribute('name');
-                var address = markerElem.getAttribute('address');
-                var type = markerElem.getAttribute('type');
-                var point = new google.maps.LatLng(
-                    parseFloat(markerElem.getAttribute('lat')),
-                    parseFloat(markerElem.getAttribute('lng')));
-                var getpath=markerElem.getAttribute('path');// pour obtenir le path pour l image
-                var infowincontent = document.createElement('div');
-                alert(markers);
-                var textprix= document.createElement('strong');
-                textprix.style.color='#f12b4a';
-                textprix.fontWeight = "bolder";
-                textprix.fontSize='900px';
-                textprix.textContent=type + '$ '; // on va changer le nom par prix
-                infowincontent.appendChild(textprix);
-                infowincontent.appendChild(document.createElement('br'));
-
-                var strong = document.createElement('strong');
-                strong.textContent = name;
-                infowincontent.appendChild(strong);
-                infowincontent.appendChild(document.createElement('br'));
-
-                var text = document.createElement('text');
-                text.textContent = address;
-                infowincontent.appendChild(text);
-                infowincontent.appendChild(document.createElement('br'));
-
-                var image= document.createElement('img');
-                image.style.height='200px';
-                image.style.width='200px';
-                image.src=getpath;
-
-                infowincontent.appendChild(image);
-
-                var icon={
-                    url:'upload/imagesAnnonces/default.png',
-                    scaledSize:new google.maps.Size(35,35),
-                    origin: new google.maps.Point(0,0),
-                    anchor: new google.maps.Point(0,0)
-                }
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: point,
-                    //label: icon.label
-                    icon:icon
-                });
-                marker.addListener('mouseout', function() {
-                        infoWindow.close(map,marker);
-                });
-                marker.addListener('mouseover', function() {
-                    infoWindow.setContent(infowincontent);
-                    infoWindow.open(map, marker);
-                });
-                marker.addListener('click',function() {
-                    infoWindow.close(map, marker);
-                    document.getElementById("message").innerHTML = "<style>label{ color:darkblue} img{ width: 400px; height: 400px }</style><label >Propietaire :</label> <strong>" + name + "</strong>" + "<br>" +
-                        "<label>Adresse :</label> <strong>" + address + "</strong><br><img src=" + getpath + " >";
-
-                });
-            });
-        });
-    }
+<div class="col-lg-12 ">
+    <div class="container">
+        <div class="well" id="dispoInline">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Recherche par">
+                </div>
+                <div class="form-group" style="width:auto;">
+                    <div id="slider-range" style="max-width: 100%;">
+                        <span><b>0</b></span>
+                        <span class="pull-right"><b>1200</b></span>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <h3 for="amount"><b>Prix :<b></h3>
+                </div>
+                <div class="form-group">
+                    <input  type="text" id="amount" readonly="true" class="form-control" >
+                </div>
+                <button type="submit" class="btn btn-default" id="btnPersonnalise">Recherche</button>
+            </form>
+        </div>
+    </div>
 
 
-    function downloadUrl(url, callback) {
-        var request = window.ActiveXObject ?
-            new ActiveXObject('Microsoft.XMLHTTP') :
-            new XMLHttpRequest;
+    <div class="col-lg-8  col-sx-12" style=" margin:0 1em 0 0; width:65%;">
+        <div>
+            <div id="map"></div>
+        </div>
+    </div>
+    <!--span style="width:1px;">e</span-->
+    <div class="col-lg-4 col-sx-12" style=" margin:0 0 0 0; width:34%; border:1px red solid; ">
+        <div class="title"><span>Aperçu :</span></div>
+        <div id="message" class="message"></div>
+    </div>
+</div>
 
-        request.onreadystatechange = function() {
-            if (request.readyState == 4) {
-                request.onreadystatechange = doNothing;
-                callback(request, request.status);
-            }
-        };
-
-        request.open('GET', url, true);
-        request.send(null);
-    }
-
-    function doNothing() {}
-</script>
+<script type="text/javascript" src="assets/js/scriptCarteGoogle.js"></script>
 <script defer async
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTBYRZ3zAUQ81jl-x8Y8J14WqVIP4Es9g&callback=initMap">
 </script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="assets/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/js/barrePrix.js"></script>
 
-    <div id="map"></div>
-<div class="title">
- <span>Aperçu :</span>
+<div style="clear:both; margin-top:4em;">
+    <?php include'footer.php';?>
 </div>
-<div id="message" class="message" style="clear:both;">
-
-</div>
-
-<?php include'footer.php';?>

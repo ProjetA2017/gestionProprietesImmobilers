@@ -1,5 +1,6 @@
 <?php
 require_once('./controler/Action.interface.php');
+require_once('./controler/RequestAjaxAction.interface.php');
 class MarkersCarteAction implements Action, RequestAjaxAction {
 	public function execute(){
     	require_once './model/classes/GereAnnonce.php';

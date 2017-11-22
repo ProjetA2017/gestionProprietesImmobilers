@@ -1,4 +1,4 @@
-<?php include'header.php';?>
+<?php include 'header.php';?>
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
@@ -14,10 +14,7 @@
     <!--<input name="action" value="uploaderImages" type="hidden" />
     <button name="btnConfirm">Confirmer </button>-->
   </form>
-</div>
-
-<div>
-    <button onclick="nonPhotos()">continuer </button>
+  <button class="btn btn-success" name="bAfficherEmplacement" id="bAfficherEmplacement" onclick="nonPhotos()">Afficher l'emplacement</button>
 </div>
 
 <script>
@@ -48,6 +45,6 @@
         };
     </script>
 <!-- Fin pou la partie remove image : il faut la compléter -->
-    <script src="dropzone.js"></script>
+<script src="assets/js/dropzone.js"></script>
 
-<?php include'footer.php';?>
+<?php include 'footer.php';?>

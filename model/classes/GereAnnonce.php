@@ -1,6 +1,7 @@
 <?php
 require_once 'model/dao/AnnonceDAO.php';
 require_once 'model/classes/Annonce.class.php';
+require_once 'model/classes/GereTypeLogement.php';
 require_once 'model/classes/Services.class.php';
 
 class GereAnnonce {
@@ -18,33 +19,48 @@ class GereAnnonce {
       $prenom =$_REQUEST['prenom'];
       $adresse=$_REQUEST['adresse'];
       $prix =$_REQUEST['prix'];
-      $typeAnnonce =$_REQUEST['typeannonce'];
+      $typeAnnonce =$_REQUEST['typeAnnonce'];
       $typeLogement =$_REQUEST['typelogement'];
       $idannonce = $idannonceur."-".$typeLogement."-".$lat."-".$long;
-      //$resultat = TRUE;
+      $resultat = TRUE;
       /*if ($identifiant == "") {
           $_SESSION["messageErreurCreationCompte"]["identifiant"] = "Identifiant obligatoire";
           $resultat = FALSE;
       }*/
       //if ($resultat) {
-          $dao = new AnnonceDAO();
-         /* $annonce = $dao->findAnnonce($identifiant);
-          if ($annonce != NULL) {
-             $_SESSION["messageErreurCreationCompte"]["identifiant"] = "annonce déjà existante";
-             return FALSE;
-          }*/
-          $annonce = new Annonce();
-          $annonce->setIdAnnonce($idannonce);
-          $annonce->setIdAnnonceur($idannonceur);
-          $annonce->setLatitude($lat);
-          $annonce->setLongitude($long);
-          $annonce->setNom($nom);
-          $annonce->setPrenom($prenom);
-          $annonce->setAdresse($adresse);
-          $annonce->setPrix($prix);
-          $annonce->setTypeAnnonce($typeAnnonce);
-          $annonce->setTypeLogement($typeLogement);
-          $dao->createAnnonce($annonce);
+      $dao = new AnnonceDAO();
+     /* $annonce = $dao->findAnnonce($identifiant);
+      if ($annonce != NULL) {
+         $_SESSION["messageErreurCreationCompte"]["identifiant"] = "annonce déjà existante";
+         return FALSE;
+      }*/
+      $annonce = new Annonce();
+      $annonce->setIdAnnonce($idannonce);
+      $annonce->setIdAnnonceur($idannonceur);
+      $annonce->setLatitude($lat);
+      $annonce->setLongitude($long);
+      $annonce->setNom($nom);
+      $annonce->setPrenom($prenom);
+      $annonce->setAdresse($adresse);
+      $annonce->setPrix($prix);
+      $annonce->setTypeAnnonce($typeAnnonce);
+      $annonce->setTypeLogement($typeLogement);
+      $dao->createAnnonce($annonce);
+
+      if ($typeLogement == 'appartement'){
+          GereTypeLogement::creerUneAnnonceAppart($idannonce, $typeAnnonce);
+          array_push($_SESSION['tabTest'] ,$typeLogement);
+      }
+
+      if ($typeLogement == 'maison'){
+          GereTypeLogement::creerUneAnnonceMaison($idannonce, $typeAnnonce);
+          array_push($_SESSION['tabTest'] ,$typeLogement);
+      }
+
+      if ($typeLogement == 'appartement'){
+          GereTypeLogement::creerUneAnnonceBureaux($idannonce, $typeAnnonce);
+          array_push($_SESSION['tabTest'] ,$typeLogement);
+      }
      // }
       //return $resultat;
   }
