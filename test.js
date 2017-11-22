@@ -1,3 +1,0 @@
-function tetser (){
-    alert('test');
-}
