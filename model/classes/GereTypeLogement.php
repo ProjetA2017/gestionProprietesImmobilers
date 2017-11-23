@@ -82,7 +82,7 @@ class GereTypeLogement {
         else $nbrChambres = "null";
 
       $inclus = "";
-      $tabInclus = $_REQUEST['IncludeApt'];
+      $tabInclus = $_REQUEST['includeMaison'];
       if(!isset($_REQUEST['includeMaison']) || empty($_REQUEST['includeMaison']))   $inclus = "null";
         else
           {
@@ -119,6 +119,58 @@ class GereTypeLogement {
       array_push($_SESSION['tabTest'] ,$idannonce);
       array_push($_SESSION['tabTest'] ,$_REQUEST['typeAnnonce']);
       array_push($_SESSION['tabTest'] ,$nbrChambres);
+      array_push($_SESSION['tabTest'] ,$inclus);
+      array_push($_SESSION['tabTest'] ,$infos);*/
+  }
+
+  public static function creerUneAnnonceBureaux($idannonce, $typeAnnonce) {
+      if (!ISSET($_SESSION)) {
+        session_start();
+      }
+      /*if (ISSET($_SESSION["messageErreurCreationCompte"])) {
+        UNSET($_SESSION["messageErreurCreationCompte"]);
+      }*/
+      if(ISSET($_REQUEST['nbrEmp']))  $nbrEmployes = $_REQUEST['nbrEmp'];
+        else $nbrEmployes = "null";
+
+      $inclus = "";
+      $tabInclus = $_REQUEST['includeBur'];
+      if(!isset($_REQUEST['includeBur']) || empty($_REQUEST['includeBur']))   $inclus = "null";
+        else
+          {
+	           $tabChecked = $_REQUEST["includeBur"];
+	           foreach ($tabChecked as $checked) $inclus .= $checked." ";
+          }
+
+      if(ISSET($_REQUEST['infoAutreBur'])) $infos = $_REQUEST['infoAutreBur'];
+        else $infos = "null";
+
+      //$resultat = TRUE;
+      /*if ($identifiant == "") {
+          $_SESSION["messageErreurCreationCompte"]["identifiant"] = "Identifiant obligatoire";
+          $resultat = FALSE;
+      }*/
+      //if ($resultat) {
+      $dao = new AnnonceBureauxDAO();
+         /* $annonce = $dao->findAnnonce($identifiant);
+          if ($annonce != NULL) {
+             $_SESSION["messageErreurCreationCompte"]["identifiant"] = "annonce déjà existante";
+             return FALSE;
+          }*/
+      $annonceBureaux = new AnnonceBureaux();
+      $annonceBureaux->setIdAnnonce($idannonce);
+      $annonceBureaux->setTypeAnnonce($typeAnnonce);
+      $annonceBureaux->setNbrEmployes($nbrEmployes);
+      $annonceBureaux->setInclus($inclus);
+      $annonceBureaux->setInfoSupplementaire($infos);
+      $dao->createAnnonceBureaux($annonceBureaux);
+     // }
+      //return $resultat;
+      //pour les tests :
+      /*$_SESSION['tabTest'] = array();
+      array_push($_SESSION['tabTest'] ,$idannonce);
+      array_push($_SESSION['tabTest'] ,$_REQUEST['typeAnnonce']);
+      array_push($_SESSION['tabTest'] ,$nbrEmployes);
       array_push($_SESSION['tabTest'] ,$inclus);
       array_push($_SESSION['tabTest'] ,$infos);*/
   }

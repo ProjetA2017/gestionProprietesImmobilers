@@ -12,6 +12,9 @@ class Annonce {
     private $prix = "";
     private $typeAnnonce = "";
     private $typeLogement = "";
+    private $date = "";
+    private $status = "";
+    private $dateTraitementAnnonce = "";
 
     /*function __construct($idannonce, $idannonceur, $nom, $prenom, $adresse, $longitude, $latitude, $prix, $typeAnnonce, $typeLogement)
     {
@@ -39,6 +42,9 @@ class Annonce {
         $this->prix = "";
         $this->typeAnnonce = "";
         $this->typeLogement = "";
+        $this->date = "";
+        $this->status = "";
+        $this->dateTraitementAnnonce = "";
     }
 
     public function getIdAnnonceur() {
@@ -81,6 +87,18 @@ class Annonce {
         return $this->typeLogement;
     }
 
+    public function getDate() {
+        return $this->date;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function getDateTraitement() {
+        return $this->dateTraitementAnnonce;
+    }
+
     public function setIdAnnonceur($idannonceur) {
         $this->idannonceur = $idannonceur;
     }
@@ -121,6 +139,18 @@ class Annonce {
         $this->typeLogement = $typeLogement;
     }
 
+    public function setDate($date) {
+        $this->date = $date;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+    public function setDateTraitement($date) {
+        $this->dateTraitementAnnonce = $date;
+    }
+
     public function loadFromObject($x) {
         $this->idannonce = $x->idannonce;
         $this->idannonceur = $x->idannonceur;
@@ -132,6 +162,9 @@ class Annonce {
         $this->prix = $x->prix;
         $this->typeAnnonce = $x->typeannonce;
         $this->typeLogement = $x->logement;
+        $this->date = $x->date;
+        $this->status = $x->status;
+        $this->dateTraitementAnnonce = $x->dateTraitementAnnonce;
     }
 
     public function loadFromArray($tab) {
@@ -145,6 +178,9 @@ class Annonce {
         $this->prix = $tab["prix"];
         $this->typeAnnonce = $tab["typeannonce"];
         $this->typeLogement = $tab["typelogement"];
+        $this->date = $tab["date"];
+        $this->status = $tab["status"];
+        $this->dateTraitementAnnonce = $tab["datetraitementannonce"];
     }
 
 }

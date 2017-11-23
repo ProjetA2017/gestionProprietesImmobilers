@@ -49,17 +49,17 @@ class GereAnnonce {
 
       if ($typeLogement == 'appartement'){
           GereTypeLogement::creerUneAnnonceAppart($idannonce, $typeAnnonce);
-          array_push($_SESSION['tabTest'] ,$typeLogement);
+          //array_push($_SESSION['tabTest'] ,$typeLogement);
       }
 
       if ($typeLogement == 'maison'){
           GereTypeLogement::creerUneAnnonceMaison($idannonce, $typeAnnonce);
-          array_push($_SESSION['tabTest'] ,$typeLogement);
+          //array_push($_SESSION['tabTest'] ,$typeLogement);
       }
 
       if ($typeLogement == 'bureaux'){
           GereTypeLogement::creerUneAnnonceBureaux($idannonce, $typeAnnonce);
-          array_push($_SESSION['tabTest'] ,$typeLogement);
+          //array_push($_SESSION['tabTest'] ,$typeLogement);
       }
      // }
       //return $resultat;
@@ -132,7 +132,7 @@ class GereAnnonce {
         foreach ($lesAnnonces as $row){
             echo '<marker ';
             echo 'path="' . $dao->chercherIdMarker($row['idannonce']). '" ';
-            //echo 'path="' . $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'). '" ';
+            //echo 'path="' . $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'). '" ';//test
             echo 'lat="' . $row['latitude'] . '" ';
             echo 'lng="' . $row['longitude'] . '" ';
             echo 'name="' . Services::parseToXML($row['prenom']) . '" ';

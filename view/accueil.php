@@ -105,9 +105,8 @@
           <div class="row">
             <div class="col-lg-3 col-sm-3 ">
               <select class="form-control">
-                <option>Acheter</option>
-                <option>Louer</option>
-                <option>Vendre</option>
+                <option>À acheter</option>
+                <option>À louer</option>
               </select>
             </div>
             <div class="col-lg-3 col-sm-4">
@@ -123,7 +122,7 @@
             <select class="form-control">
                 <option>Propriété</option>
                 <option>Appartement</option>
-                <option>Édifice</option>
+                <option>Maison</option>
                 <option>Espaces de bureaux</option>
                 </select>
               </div>

@@ -52,11 +52,11 @@ class AnnonceBureauxDAO {
     }
   }
 
-    public static function createAnnonceAppart($annonceBureaux)
+    public static function createAnnonceBureaux($annonceBureaux)
     {
             $db = Database::getInstance();
             try {
-                $pstmt = $db->prepare("INSERT INTO annoncesapparts (idannonce, typeannonce, nbremployes, inclus, infosupplementaire)
+                $pstmt = $db->prepare("INSERT INTO annoncesbureaux (idannonce, typeannonce, nbremployes, inclus, infosupplementaire)
                                        VALUES (:a,:b,:c,:d,:e)");
                 $pstmt->execute(array(':a' => htmlspecialchars($annonceBureaux->getIdAnnonce()),
                                       ':b' => htmlspecialchars($annonceBureaux->getTypeAnnonce()),

@@ -66,7 +66,7 @@ function initMap() {
             });
             marker.addListener('click',function() {
                 infoWindow.close(map, marker);
-                document.getElementById("message").innerHTML = "<style>label{ color:darkblue} #toto img{ width: 400px; height: 400px; position:relative; }</style><label >Propietaire :</label> <strong>" + name + "</strong>" + "<br>" +
+                document.getElementById("message").innerHTML = "<style>label{ color:darkblue} #afficheDetailsMarker img{ width: 400px; height: 400px; position:relative; }</style><label >Propietaire :</label> <strong>" + name + "</strong>" + "<br>" +
                     "<label>Adresse :</label> <strong>" + address + "</strong><br><img src=" + getpath + " >";
 
             });

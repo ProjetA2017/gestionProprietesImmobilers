@@ -83,45 +83,39 @@
         	<table>
         		<tr>
         			<td>
-        				<input type="checkbox" name="includeBur" id="includeBur" value="includeBurSign">
+        				<input type="checkbox" name="includeBur[]" id="includeBur" value="wifi">
      				</td>
      				<td>
      					<label style="margin-bottom:13px;"><span class="glyphicon glyphicon-signal" style="font-size:1.5em;"></span>&nbsp;&nbsp;&nbsp;</label>
      				</td>
      				<td>
-        				<input type="checkbox" name="includeBur" id="includeBur" value="includeBurPrint">
+        				<input type="checkbox" name="includeBur[]" id="includeBur" value="imprimante">
      				</td>
      				<td>
      					<label style="margin-bottom:13px;"><span class="glyphicon glyphicon-print" style="font-size:1.5em;"></span>&nbsp;&nbsp;&nbsp;</label>
      				</td>
      				<td>
-        				<input type="checkbox" name="includeBur" id="includeBur" value="includeBurLock">
-     				</td>
-     				<td>
-     					<label style="margin-bottom:13px;"><span class="glyphicon glyphicon-lock" style="font-size:1.5em;"></span>&nbsp;&nbsp;&nbsp;</label>
-     				</td>
-     				<td>
-        				<input type="checkbox" name="includeBur" id="includeBur" value="includeBurClip">
+        				<input type="checkbox" name="includeBur[]" id="includeBur" value="casiers">
      				</td>
      				<td>
      					<label style="margin-bottom:13px;"><span class="glyphicon glyphicon-paperclip" style="font-size:1.5em;"></span>&nbsp;&nbsp;&nbsp;</label>
      				</td>
      				<td>
-        				<input type="checkbox" name="includeBur" id="includeBur" value="includeBurPhone">
+        				<input type="checkbox" name="includeBur[]" id="includeBur" value="telephonie">
      				</td>
      				<td>
      					<label style="margin-bottom:13px;"><span class="glyphicon glyphicon-earphone" style="font-size:1.5em;"></span>&nbsp;&nbsp;&nbsp;</label>
      				</td>
      				</td>
      				<td>
-        				<input type="checkbox" name="includeBur" id="includeBur" value="includeBurCutlery">
+        				<input type="checkbox" name="includeBur[]" id="includeBur" value="restauration">
      				</td>
      				<td>
      					<label style="margin-bottom:13px;"><span class="glyphicon glyphicon-cutlery" style="font-size:1.5em;"></span>&nbsp;&nbsp;&nbsp;</label>
      				</td>
 
      				<td>
-        				<input type="checkbox" name="includeBur" id="includeBur" value="includeBurEnvelope">
+        				<input type="checkbox" name="includeBur[]" id="includeBur" value="service de courrier">
      				</td>
      				<td>
      					<label style="margin-bottom:13px;"><span class="glyphicon glyphicon-envelope" style="font-size:1.5em;"></span>&nbsp;&nbsp;&nbsp;</label>
@@ -132,7 +126,7 @@
     	</div>
     	<div class="form-group" style="padding-left:10px;">
   			<label>Autre information:</label>
-  			<textarea class="form-control" rows="8" id="infoAutreBur"></textarea>
+  			<textarea class="form-control" rows="8" name = "infoAutreBur" id="infoAutreBur"></textarea>
 		</div>
 	</div>
 </div>

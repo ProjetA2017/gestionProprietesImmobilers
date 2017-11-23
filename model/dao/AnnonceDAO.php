@@ -1,7 +1,7 @@
 <?php
 include_once('model/classes/Database.class.php');
 include_once('model/classes/Annonce.class.php');
-//include_once('model/classes/Liste.class.php');
+include_once('model/classes/Liste.class.php');
 
 class AnnonceDAO {
 
@@ -51,6 +51,29 @@ class AnnonceDAO {
     } catch (PDOException $e) {
         print "Error!: ";// . $e->getMessage() . "<br/>";
         return $listeAnnonces;
+    }
+  }
+
+//TODO : à revoir utiliser peur être findAllAnnonces qui retourne un tableau
+  public static function findAllAnnoncesListe()
+  {
+    $db = Database::getInstance();
+    try {
+      $liste = new Liste();
+      $requete = 'SELECT * FROM annonces ORDER BY prix DESC';
+      $pstmt = $db->query($requete);
+      foreach($pstmt as $row) {
+          $annonce = new Annonce();
+          $annonce->loadFromArray($row);
+          $liste->add($annonce);
+        }
+      $pstmt->closeCursor();
+      $pstmt = NULL;
+      Database::close();
+      return $liste;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return $liste;
     }
   }
 

@@ -7,17 +7,17 @@ $(function(){
   $("#infoLocationMaison").hide();
 
   $("#typelogement, #typeAnnonce, #infoLocationMaison").change(function() {
-    if ( ($("#typeAnnonce").val() === "location") && ($("#typelogement").val() === "appartement" )) {
+    if ($("#typelogement").val() === "appartement" ) {
     	$("#infoLocationBur").hide();
       $("#infoLocationMaison").hide();
       $("#infoLocation").show();
     }
-  	else if ( ($("#typeAnnonce").val() === "location") && ($("#typelogement").val() === "bureaux" )) {
+  	else if ( $("#typelogement").val() === "bureaux" ) {
     	$("#infoLocation").hide();
       $("#infoLocationMaison").hide();
     	$("#infoLocationBur").show();
   	}
-    else if ( ($("#typeAnnonce").val() === "location") && ($("#typelogement").val() === "maison" )) {
+    else if ($("#typelogement").val() === "maison" ) {
       $("#infoLocation").hide();
       $("#infoLocationBur").hide();
       $("#infoLocationMaison").show();
