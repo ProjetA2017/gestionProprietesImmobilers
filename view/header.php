@@ -101,11 +101,11 @@
       <div class="dropdown">
         <div data-toggle="dropdown">
           <?php
-          if (ISSET($_SESSION["connected"])) {
+          if (ISSET($_SESSION["membre"])) {
           ?>
             <a href="#" style="text-decoration:none;"><span class="glyphicon glyphicon-user"></span>
           <?php
-            echo $_SESSION["connected"];
+            echo $_SESSION["membre"]->getIdentifiant();
           ?>
             <span class="caret">
             </a>

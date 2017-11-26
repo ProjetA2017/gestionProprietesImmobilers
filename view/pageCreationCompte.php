@@ -17,8 +17,10 @@
                 <input name="action" value="creerCompteMembre" type="hidden" />
                 <input type="text" class="form-control" placeholder="Identifiant" name="identifiant">
                 <input type="email" class="form-control" placeholder="Courriel" name="courriel">
+                <input type="text" class="form-control" placeholder="Nom" name="nom" id="nfamille" required="required">
+                <input type="text" class="form-control" placeholder="Prénom" name="prenom" id="prenom"  required="required">
                 <input type="password" class="form-control" placeholder="Mot de passe" name="motdpass">
-                <input type="password" class="form-control" placeholder="Confirmer mot de passe" name="motdpassConfirm">
+                <input type="password" class="form-control" placeholder="Confirmer mot de passe" name="motdpassconfirm">
                 <!--<textarea rows="6" class="form-control" placeholder="Addresse" name="adresse"></textarea>-->
       <button type="submit" class="btn btn-success" name="bCreationCompte">Créer un compte</button>
     </form>

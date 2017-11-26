@@ -5,7 +5,7 @@ require_once('./model/classes/GereAnnonce.php');
 class CreationAnnonceAction implements Action { //, RequestAjaxAction {
 	public function execute(){
     if (!ISSET($_SESSION)) session_start();
-    if (!ISSET($_SESSION['connected']) || empty($_SESSION['connected']))
+    if (!ISSET($_SESSION['membre']) || empty($_SESSION['membre']))
       return "default";
 		if(ISSET($_REQUEST['bCreationAnnonce'])) {
 			GereAnnonce::creerUneAnnonce();

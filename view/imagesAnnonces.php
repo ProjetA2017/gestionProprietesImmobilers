@@ -10,7 +10,7 @@
 
 
 <div class="containerImage">
-  <form action="?action=uploaderImages" class="dropzone " id="my-dropzone">
+  <form action="" class="dropzone " id="my-dropzone">
     <!--<input name="action" value="uploaderImages" type="hidden" />
     <button name="btnConfirm">Confirmer </button>-->
   </form>

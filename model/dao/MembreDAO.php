@@ -36,11 +36,13 @@ public static function createMembre($membre)
 {
         $db = Database::getInstance();
         try {
-            $pstmt = $db->prepare("INSERT INTO membre (`IDENTIFIANT`, `MOTDEPASSE`, `COURRIEL`)
-                                   VALUES (:i,:mp,:c)");
+            $pstmt = $db->prepare("INSERT INTO membre (`IDENTIFIANT`, `MOTDEPASSE`, `COURRIEL`, `NOM`, `PRENOM`)
+                                   VALUES (:i,:mp,:c,:n,:p)");
             $pstmt->execute(array(':i' => htmlspecialchars($membre->getIdentifiant()),
                                   ':mp' => htmlspecialchars($membre->getMotDePasse()),
-                                  ':c' => htmlspecialchars($membre->getCourriel())
+                                  ':c' => htmlspecialchars($membre->getCourriel()),
+                                  ':n' => htmlspecialchars($membre->getNom()),
+                                  ':p' => htmlspecialchars($membre->getPrenom())
                                   ));
             $pstmt->closeCursor();
             $pstmt = NULL;

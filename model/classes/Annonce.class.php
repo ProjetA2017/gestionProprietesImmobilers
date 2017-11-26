@@ -13,6 +13,7 @@ class Annonce {
     private $typeAnnonce = "";
     private $typeLogement = "";
     private $date = "";
+    private $imgAnnonce = "";
     private $status = "";
     private $dateTraitementAnnonce = "";
 
@@ -32,7 +33,7 @@ class Annonce {
 
     public function __construct()
     {
-        $this->idannonce = "";
+        /*$this->idannonce = "";
         $this->idannonceur = "";
         $this->nom = "";
         $this->prenom = "";
@@ -43,8 +44,9 @@ class Annonce {
         $this->typeAnnonce = "";
         $this->typeLogement = "";
         $this->date = "";
+        $this->imgAnnonce = "";
         $this->status = "";
-        $this->dateTraitementAnnonce = "";
+        $this->dateTraitementAnnonce = "";*/
     }
 
     public function getIdAnnonceur() {
@@ -89,6 +91,10 @@ class Annonce {
 
     public function getDate() {
         return $this->date;
+    }
+
+    public function getImgAnnonce() {
+        return $this->imgAnnonce;
     }
 
     public function getStatus() {
@@ -143,6 +149,10 @@ class Annonce {
         $this->date = $date;
     }
 
+    public function setImgAnnonce($img) {
+        $this->imgAnnonce = $img;
+    }
+
     public function setStatus($status) {
         $this->status = $status;
     }
@@ -154,17 +164,18 @@ class Annonce {
     public function loadFromObject($x) {
         $this->idannonce = $x->idannonce;
         $this->idannonceur = $x->idannonceur;
-        $this->nom = $x->nom;
+        $this->nom = $x->nfamille;
         $this->prenom = $x->prenom;
         $this->adresse = $x->adresse;
         $this->latitude = $x->latitude;
         $this->longitude = $x->longitude;
         $this->prix = $x->prix;
         $this->typeAnnonce = $x->typeannonce;
-        $this->typeLogement = $x->logement;
-        $this->date = $x->date;
+        $this->typeLogement = $x->typelogement;
+        $this->date = $x->dateannonce;
+        $this->imgAnnonce = $x->imgannonce;
         $this->status = $x->status;
-        $this->dateTraitementAnnonce = $x->dateTraitementAnnonce;
+        $this->dateTraitementAnnonce = $x->datetraitementannonce;
     }
 
     public function loadFromArray($tab) {
@@ -178,7 +189,8 @@ class Annonce {
         $this->prix = $tab["prix"];
         $this->typeAnnonce = $tab["typeannonce"];
         $this->typeLogement = $tab["typelogement"];
-        $this->date = $tab["date"];
+        $this->date = $tab["dateannonce"];
+        $this->imgAnnonce = $tab["imgannonce"];
         $this->status = $tab["status"];
         $this->dateTraitementAnnonce = $tab["datetraitementannonce"];
     }

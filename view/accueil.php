@@ -1,67 +1,23 @@
 <?php include'header.php';?>
 
-
 <div class="">
 
         <div id="slider" class="sl-slider-wrapper">
 
         <div class="sl-slider">
-
+          <?php foreach ($_SESSION['lesAnnoncesTop4Maisons'] as $row) { ?>
           <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
             <div class="sl-slide-inner">
               <div class="bg-img bg-img-1"></div>
              <h2>Trouver votre appartenance</h2>
               <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 6400 16e Avenue, Montreal</p>
+              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> <?=$row['adresse']?></p>
               <!--<p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>-->
-              <cite>$ 1200</cite>
+              <cite><?=$row['prix']?> $</cite>
               </blockquote>
             </div>
           </div>
-
-          <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
-            <div class="sl-slide-inner">
-              <div class="bg-img bg-img-2"></div>
-              <h2>Trouver votre appartenance</h2>
-              <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 6400 16e Avenue, Montreal</p>
-              <cite>$ 655</cite>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
-               <div class="sl-slide-inner">
-              <div class="bg-img bg-img-3"></div>
-              <h2>Trouver votre appartenance</h2>
-              <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 6400 16e Avenue, Montreal</p>
-              <cite>$ 620</cite>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
-                <div class="sl-slide-inner">
-              <div class="bg-img bg-img-4"></div>
-              <h2>Trouver votre appartenance</h2>
-              <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 6400 16e Avenue, Montreal</p>
-              <cite>$ 550</cite>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1">
-            <div class="sl-slide-inner">
-              <div class="bg-img bg-img-5"></div>
-              <h2>Trouver votre appartenance</h2>
-              <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 6400 16e Avenue, Montreala</p>
-              <cite>$ 670</cite>
-              </blockquote>
-            </div>
-          </div>
+          <?php } ?>
         </div><!-- /sl-slider -->
 
         <nav id="nav-dots" class="nav-dots">
@@ -77,64 +33,17 @@
 
 
 <!-- begin banner -->
+
 <div class="banner-search">
   <div class="container">
     <!-- banner -->
-    <h3>Recherche</h3>
+    <!--<h3>Recherche</h3>-->
     <div class="searchbar">
       <div class="row">
-        <div class="col-lg-6 col-sm-6">
-          <input type="text" class="form-control" placeholder="Recherche par">
-
-
-          <div class="row">
-            <div class="col-lg-12 col-sm-12">
-              <span><b>0</b></span>
-              <span class="pull-right"><b>1200</b></span>
-              <div id="slider-range" ></div>
-
-              <br/>
-              <label for="amount">Prix :</label>
-              <input  type="text" id="amount" readonly="true" class="form-control" >
-              <input  type="text" id="inputPrix" >
-              <input  type="text" id="inputPrix2" >
-              </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-lg-3 col-sm-3 ">
-              <select class="form-control">
-                <option>À acheter</option>
-                <option>À louer</option>
-              </select>
-            </div>
-            <div class="col-lg-3 col-sm-4">
-              <select class="form-control">
-                <option>Prix</option>
-                <option>$150,000 - $200,000</option>
-                <option>$200,000 - $250,000</option>
-                <option>$250,000 - $300,000</option>
-                <option>$300,000 - plus</option>
-              </select>
-            </div>
-            <div class="col-lg-3 col-sm-4">
-            <select class="form-control">
-                <option>Propriété</option>
-                <option>Appartement</option>
-                <option>Maison</option>
-                <option>Espaces de bureaux</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-sm-5">
-              <button class="btn btn-success"  onclick="window.location.href='?action=pageChercher'">Chercher</button>
-              </div>
-          </div>
-
         </div>
         <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
           <?php
-               if (!ISSET($_SESSION["connected"]))
+               if (!ISSET($_SESSION["membre"]))
                {
                  echo "<p>Inscrivez-vous et restez à l'affût des dernières annonces</p>";
                  echo '<button class="btn btn-info" data-toggle="modal" data-target="#loginpop">Se connecter</button>';
@@ -149,12 +58,6 @@
       </div>
     </div>
   </div>
-</div>
-<!-- end banner -->
-  <!--div class="pull-right viewal" style="padding-bottom: 10px; border:1px yellow solid;margin-right:50px;">
-    <a href="?action=pageChercher" style="border:1px red solid;">Voir l'ensemble de la liste</a>
-    <a href="?action=pageChercher" style="border:1px blue solid;">Voir l'ensemble de la liste</a>
-  </div-->
 
 <div class="container">
   <div class="properties-listing spacer">
@@ -166,90 +69,18 @@
   </div>
     <h2>Présentation des propriétés</h2>
     <div id="owl-example" class="owl-carousel">
+<?php foreach ($_SESSION['lesAnnonces'] as $row) { ?>
       <div class="properties">
-        <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties"/>
-          <div class="status sold">Vendu</div>
+        <div class="image-holder"><img src="upload/imagesAnnonces/<?=$row['imgannonce']?>" class="img-responsive" alt="properties"/>
+          <div class="status new"><?=$row['status']?></div>
         </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
+        <h4><a href="?action=pageDetails">Khaoula Lmhboula</a></h4>
+        <p class="price">Prix : <?=$row['prix']?> $</p>
+        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typeannonce']?>">!</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typelogement']?>">?</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
+        <a class="btn btn-primary" href="?action=pageDetails&idannonce=<?=$row['idannonce']?>">Voir les détails</a>
       </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties"/>
-          <div class="status new">New</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties"/></div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/4.jpg" class="img-responsive" alt="properties"/></div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties"/>
-          <div class="status sold">Vendu</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties"/>
-          <div class="status sold">Vendu</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties"/>
-          <div class="status new">New</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/4.jpg" class="img-responsive" alt="properties"/></div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties"/></div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties"/></div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties"/></div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Price: $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
+<?php } ?>
+
     </div>
   </div>
 
@@ -271,42 +102,24 @@
             <li data-target="#myCarousel" data-slide-to="3" class=""></li>
           </ol>
           <!-- Carousel items -->
-          <div class="carousel-inner">
-            <div class="item active">
-              <div class="row">
-                <div class="col-lg-4"><img src="images/properties/1.jpg" class="img-responsive" alt="properties"/></div>
-                <div class="col-lg-8">
-                  <h5><a href="?action=pageDetails">Integer sed porta quam</a></h5>
-                  <p class="price">$300,000</p>
-                  <a href="?action=pageDetails" class="more">Plus de détails</a> </div>
+            <div class="carousel-inner">
+              <?php
+                $indice = 0;
+                foreach ($_SESSION['lesAnnoncesTop4Maisons'] as $row) {
+                $image = ($row['imgannonce'] == NULL ? "default.jpg" : $row['imgannonce']);
+                $indice++;
+                $item = ($indice == 1 ? "item active" : "item");
+              ?>
+              <div class="<?=$item?>">
+                <div class="row">
+                  <div class="col-lg-4"><img src="upload/imagesAnnonces/<?=$image?>" class="img-responsive" alt="<?=$row['typelogement']?>"/></div>
+                  <div class="col-lg-8">
+                    <h5><a><?=$row['status']?></a></h5>
+                    <p class="price"><?=$row['prix']?> $</p>
+                    <a href="?action=pageDetails&idannonce=<?=$row['idannonce']?>" class="more">Plus de détails</a> </div>
+                </div>
               </div>
-            </div>
-            <div class="item">
-              <div class="row">
-                <div class="col-lg-4"><img src="images/properties/2.jpg" class="img-responsive" alt="properties"/></div>
-                <div class="col-lg-8">
-                  <h5><a href="?action=pageDetails">Integer sed porta quam</a></h5>
-                  <p class="price">$300,000</p>
-                  <a href="?action=pageDetails" class="more">Plus de détails</a> </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="row">
-                <div class="col-lg-4"><img src="images/properties/3.jpg" class="img-responsive" alt="properties"/></div>
-                <div class="col-lg-8">
-                  <h5><a href="?action=pageDetails">Integer sed porta quam</a></h5>
-                  <p class="price">$300,000</p>
-                  <a href="?action=pageDetails" class="more">Plus de détails</a> </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="row">
-                <div class="col-lg-4"><img src="images/properties/4.jpg" class="img-responsive" alt="properties"/></div>
-                <div class="col-lg-8">
-                  <h5><a href="?action=pageDetails">Integer sed porta quam</a></h5>
-                  <p class="price">$300,000</p>
-                  <a href="?action=pageDetails" class="more">Plus de détails</a> </div>
-              </div>
+              <?php } ?>
             </div>
           </div>
         </div>

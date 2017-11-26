@@ -1,6 +1,8 @@
 <?php
 require_once 'model/dao/AnnonceDAO.php';
 require_once 'model/classes/Annonce.class.php';
+require_once 'model/dao/ImagesDAO.php';
+require_once 'model/classes/Image.class.php';
 require_once 'model/classes/GereTypeLogement.php';
 require_once 'model/classes/Services.class.php';
 
@@ -21,7 +23,8 @@ class GereAnnonce {
       $prix =$_REQUEST['prix'];
       $typeAnnonce =$_REQUEST['typeAnnonce'];
       $typeLogement =$_REQUEST['typelogement'];
-      $idannonce = $idannonceur."-".$typeLogement."-".$lat."-".$long;
+      $idannonce = $idannonceur."_".$typeLogement."_".$lat."_".$long;
+
       //$resultat = TRUE;
       /*if ($identifiant == "") {
           $_SESSION["messageErreurCreationCompte"]["identifiant"] = "Identifiant obligatoire";
@@ -47,6 +50,20 @@ class GereAnnonce {
       $annonce->setTypeLogement($typeLogement);
       $dao->createAnnonce($annonce);
 
+      /* pour les tests TODO : enlever à la fin
+      $_SESSION['tabTest'] = array();
+      array_push($_SESSION['tabTest'] ,$idannonceur);
+      array_push($_SESSION['tabTest'] ,$lat);
+      array_push($_SESSION['tabTest'] ,$long);
+      array_push($_SESSION['tabTest'] ,$nom);
+      array_push($_SESSION['tabTest'] ,$prenom);
+      array_push($_SESSION['tabTest'] ,$adresse);
+      array_push($_SESSION['tabTest'] ,$prix);
+      array_push($_SESSION['tabTest'] ,$typeAnnonce);
+      array_push($_SESSION['tabTest'] ,$typeLogement);
+      array_push($_SESSION['tabTest'] ,$idannonce);
+      */
+
       if ($typeLogement == 'appartement'){
           GereTypeLogement::creerUneAnnonceAppart($idannonce, $typeAnnonce);
           //array_push($_SESSION['tabTest'] ,$typeLogement);
@@ -65,64 +82,21 @@ class GereAnnonce {
       //return $resultat;
   }
 
-  public static function uploaderImages() {
-      if (!ISSET($_SESSION)) {
-        session_start();
-      }
-
-      $check = getimagesize($_FILES["file"]["tmp_name"]);//test ok
-      if($check !== false) {
-        $_SESSION["messagesUploadImgError"]['vide'] = "File is an image - " . $check["mime"] . ".";
-      } else {
-        $_SESSION["messagesUploadImgError"]['vide'] = "File is not an image.";
-        return FALSE;
-      }
-
-      $continuer = TRUE;
-      $tailleMax = 10485760;//=10Mo
-      $extensionsValides = array('jpg', 'jpeg', 'gif', 'png');//test ok
-      if (!ISSET($_FILES['file']) || $_FILES['file']["name"]=="") {
-          $_SESSION["messagesUploadImgError"]['vide'] = "Aucune selection n'a été faite!";
-          return FALSE;
-      }
-
-      if($_FILES['file']["size"] > $tailleMax){ //ok
-          $_SESSION["messagesUploadImgError"]['taille'] = "Taille maximum permise : 10 Mo";
-          return FALSE;
-      }
-
-      //test ok
-      $lesExtImg = strtolower(substr(strrchr($_FILES['file']['name'],'.'),1));
-      if(!in_array($lesExtImg,$extensionsValides)){
-          $_SESSION["messagesUploadImgError"]['extention'] = "Extension invlalide! Cahrger une image de type :  'jpg', 'jpeg', 'gif' ou 'png'";
-          return FALSE;
-      }
-
-      //$idannonceur = $_SESSION['connected'];
+  public static function afficherDetailsUneAnnonce() {
+      if (!ISSET($_SESSION)) session_start();
+      $idannonce=$_REQUEST['idannonce'];
       $dao = new AnnonceDAO();
-      $idannonce = $dao->findLastAnnonce();
-      $chemin = "upload/imagesAnnonces/";
-      $filename=$_FILES['file']['name'];
-      $idImage = /*$idannonceur."-".*/$idannonce."-".$filename;
-      $path = $chemin.$idImage;//.".".$lesExtImg;
-      if ((copy($_FILES["file"]["tmp_name"],$path))) {
-          unlink($_FILES['file']['tmp_name']);
-          $continuer = TRUE;
-      } else {
-            $_SESSION["messagesUploadImgError"]['unkown'] = "Problème non identifié : chargement d'image non réussi";
-            $filename = "default.jpg";
-            $continuer = FALSE;
-      }
-
-      if ($continuer){
-          $dao->uploaderImagesAnnonce($idImage, $idannonce,$filename,$path);
-          //$dao->uploaderImagesAnnonce($idannonce);//test
-          UNSET($_SESSION["messagesUploadImgError"]);
-          $_SESSION["messagesUploadImgeSucces"]['uploadReussi'] = "Image ajoutée à l'annonce!";
-      }
-      return $continuer;
-    }
-
+      $annonceAafficher = $dao->findAnnonce($idannonce);
+      $_REQUEST['type'] = $annonceAafficher->getTypeLogement();
+      if($annonceAafficher->getTypeLogement() == "appartement")
+        $_SESSION['annonceAafficher'] = $dao->findAnnonceAvecType($idannonce, "annoncesapparts");
+      if($annonceAafficher->getTypeLogement()  == "maison")
+        $_SESSION['annonceAafficher'] = $dao->findAnnonceAvecType($idannonce, "annoncesmaison");
+      if($annonceAafficher->getTypeLogement() == "bureaux")
+        $_SESSION['annonceAafficher'] = $dao->findAnnonceAvecType($idannonce, "annoncesbureaux");
+      $daoImg = new ImagesDAO();
+      $_REQUEST['imagesDeLannonce'] = $daoImg->findAllImagesUneAnnonce($idannonce);
+  }
     public static function chargerMarkersCarte() {
         $dao = new AnnonceDAO();
         $lesAnnonces = $dao->findAllAnnonces();
@@ -140,6 +114,25 @@ class GereAnnonce {
             echo 'type="' . $row['prix'] . '" ';
             echo '/>';
         }
+        // End XML file
+        echo '</markers>';
+    }
+
+    public static function chargerMarkersCarteUneAnnonce() {
+        $dao = new AnnonceDAO();
+        $annonce = $dao->findAnnonce($_SESSION['annonceAafficher']->idannonce);
+  //      $_SESSION['tab']=$lesAnnonces; // tests
+  //      $_SESSION['tab2'] = $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'); // tests
+        echo '<markers>';
+        echo '<marker ';
+        echo 'path="' . $dao->chercherIdMarker($annonce->getIdAnnonce()). '" ';
+        //echo 'path="' . $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'). '" ';//test
+        echo 'lat="' . $annonce->getLatitude() . '" ';
+        echo 'lng="' . $annonce->getLongitude() . '" ';
+        echo 'name="' . Services::parseToXML($annonce->getNom()) . '" ';
+        echo 'address="' . Services::parseToXML($annonce->getAdresse()) . '" ';
+        echo 'type="' . $annonce->getPrix() . '" ';
+        echo '/>';
         // End XML file
         echo '</markers>';
     }

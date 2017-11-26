@@ -60,13 +60,13 @@
               <input name = "identifiant" required="required" class="form-control" id="exampleInputEmail2" placeholder="Entrer votre identifiant ou courriel">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="exampleInputPassword2" name = "motDePasse" placeholder="Mot de passe" required="required">
+              <input type="password" class="form-control" id="exampleInputPassword2" name = "motdpass" placeholder="Mot de passe" required="required">
             </div>
-            <div class="checkbox">
+            <!--<div class="checkbox">
               <label>
                 <input type="checkbox"> Se souvenir de moi
               </label>
-            </div>
+            </div> TODO : remplacer par mot de passe oublié-->
             <button type="submit" name = "bConnexion" class="btn btn-success">Se connecter</button>
       </form>
         </div>
@@ -81,59 +81,6 @@
   </div>
 </div>
 <!-- /.modal -->
-
-<!-- Modal -->
-<div id="logoutpop" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="row">
-        <div class="col-sm-6 login">
-        <h4>Deconnexion</h4>
-          <form class="" role="form" action="" method = "post">
-            <input name="action" value="deconnection" type="hidden" />
-            <button type="submit" name = "bDeconnexion" class="btn btn-success">Se déconnecter</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /.modal -->
-
-
-<!-- Modal -->
-<div id="Annoncepopp" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="row">
-        <div class="col-sm-6 login">
-        <h4>Création d'annonce</h4>
-        <form class="" role="form" action="" method = "post">
-          <input name="action" value="creerAnnonce" type="hidden" />
-          <input type="text" hidden id="lat" value="">
-          <input type="text" hidden id="long" value="">
-          <div class="form-group">
-            <input name = "identifiant" required="required" class="form-control" name = "identifiant" id="identifiant" placeholder="Entrer votre identifiant ou courriel">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="nom" name = "nom" placeholder="Nom de famille" required="required">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="nom" name = "adresse" placeholder="Adresse" required="required">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="Prix" name = "prix" placeholder="Prix" required="required">
-          </div>
-          <button type="submit" name = "bCreationAnnonce" class="btn btn-success">Confirmer</button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /.modal -->
-
-
 
 </body>
 </html>

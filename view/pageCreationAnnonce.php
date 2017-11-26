@@ -17,9 +17,9 @@
               <input value="creerAnnonceAjax" name="action" type="hidden" />
               <input type="hidden"  name="latitude" id="lat" value="" />
               <input type="hidden"  name="longitude" id="long" value="" />
-              <input type="text" class="form-control" placeholder="Identifiant" name="identifiant" id="identifiant" value="<?=$_SESSION['connected']?>" readonly="readonly">
-              <input type="text" class="form-control" placeholder="Nom" name="nom" id="nfamille" required="required">
-              <input type="text" class="form-control" placeholder="Prénom" name="prenom" id="prenom"  required="required">
+              <input type="text" class="form-control" placeholder="Identifiant" name="identifiant" id="identifiant" value="<?=$_SESSION['membre']->getIdentifiant()?>" readonly="readonly">
+              <input type="text" class="form-control" placeholder="Nom" name="nom" value="<?=$_SESSION['membre']->getNom()?>" id="nfamille" readonly="readonly">
+              <input type="text" class="form-control" placeholder="Prénom" name="prenom" value="<?=$_SESSION['membre']->getPrenom()?>" id="prenom"  readonly="readonly">
               <input type="text" class="form-control" placeholder="Adresse" name="adresse" id="adresse" required="required">
               <input type="text" class="form-control" placeholder="Prix" name="prix" id="prix" required="required">
               <select class="form-control" placeholder="Type Annonce" name = "typeAnnonce" id="typeAnnonce" required="required">
@@ -37,7 +37,7 @@
               <button type="submit" class="btn btn-success" name="bCreationAnnonce" id="bCreationAnnonce">Créer une annonce</button>
         </div>
         </form>
-        <input value="creerAnnonceAjax" name="action" type="hidden" />
+        <!--<input value="creerAnnonceAjax" name="action" type="hidden" />-->
 
       </div>
     </div>

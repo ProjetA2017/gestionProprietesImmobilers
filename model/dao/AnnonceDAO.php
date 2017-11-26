@@ -5,30 +5,69 @@ include_once('model/classes/Liste.class.php');
 
 class AnnonceDAO {
 
-    public static function findAnnonce($identifiant)
-    {
-            $db = Database::getInstance();
-            try {
-                $pstmt = $db->prepare("SELECT * FROM annonces WHERE IDENTIFIANT = :x");
-                $pstmt->execute(array(':x' => htmlspecialchars($identifiant)));
-                $result = $pstmt->fetch(PDO::FETCH_OBJ);
-                if ($result)
-                {
-                        $annonce = new Annonce();
-                        $annonce->loadFromObject($result);
-                        $pstmt->closeCursor();
-                        $pstmt = NULL;
-                        Database::close();
-                        return $annonce;
-                }
-                $pstmt->closeCursor();
-                $pstmt = NULL;
-                Database::close();
-            }
-            catch (PDOException $ex){
-            }
-            return NULL;
+  public static function findAnnonce($idannonce)
+  {
+          $db = Database::getInstance();
+          try {
+              $pstmt = $db->prepare("SELECT * FROM annonces WHERE idannonce = :x");
+              $pstmt->execute(array(':x' => htmlspecialchars($idannonce)));
+              $result = $pstmt->fetch(PDO::FETCH_OBJ);
+              if ($result)
+              {
+                      $annonce = new Annonce();
+                      $annonce->loadFromObject($result);
+                      $pstmt->closeCursor();
+                      $pstmt = NULL;
+                      Database::close();
+                      return $annonce;
+              }
+              $pstmt->closeCursor();
+              $pstmt = NULL;
+              Database::close();
+          }
+          catch (PDOException $ex){
+          }
+          return NULL;
+  }
+
+  public static function findAnnonceAvecType($idannonce, $table)
+  {
+          $db = Database::getInstance();
+          try {
+              $pstmt = $db->prepare("SELECT * FROM annonces, ".$table." WHERE `annonces`.`idannonce` = :x AND `annonces`.`idannonce` = `".$table."`.`idannonce`");
+              //SELECT * FROM annonces, annoncesmaison WHERE `annonces`.`idannonce` = 'dris_maison_45.5141734_-73.68231480000003' AND `annonces`.`idannonce` = `annoncesmaison`.`idannonce`
+              $pstmt->execute(array(':x' => htmlspecialchars($idannonce)));
+              $result = $pstmt->fetch(PDO::FETCH_OBJ);
+              if ($result) return $result;
+              $pstmt->closeCursor();
+              $pstmt = NULL;
+              Database::close();
+          }
+          catch (PDOException $ex){
+          }
+          return NULL;
+  }
+
+  public static function findTop4Annonces()
+  {
+    $db = Database::getInstance();
+    try {
+      $requete = 'SELECT * FROM annonces WHERE typelogement = "maison" AND typeannonce = "vente" ORDER BY prix ASC LIMIT 4';
+      $pstmt = $db->query($requete);
+      $listeAnnonces = array();
+      foreach($pstmt as $row) {
+          array_push($listeAnnonces,$row);
+        }
+      $pstmt->closeCursor();
+      $pstmt = NULL;
+      Database::close();
+      return $listeAnnonces;
+    } catch (PDOException $e) {
+        print "Error!: ";// . $e->getMessage() . "<br/>";
+        return $listeAnnonces;
     }
+  }
+
 
 
   public static function findAllAnnonces()
@@ -39,9 +78,6 @@ class AnnonceDAO {
       $pstmt = $db->query($requete);
       $listeAnnonces = array();
       foreach($pstmt as $row) {
-          /*$annonce = new Annonce(); // si l ontravaille avec une liste d'objets
-          $annonce->loadFromArray($row);
-          $listeAnnonces->add($annonce);*/
           array_push($listeAnnonces,$row);
         }
       $pstmt->closeCursor();
@@ -82,7 +118,7 @@ class AnnonceDAO {
             $db = Database::getInstance();
             try
             {
-              $pstmt = $db->query("SELECT MAX(idannonce) AS last_annonce FROM annonces");//TODO:la refaire autrement (mettre le id annonce dans la session pour la récupérer lors du upload image)
+              $pstmt = $db->query("SELECT idannonce AS last_annonce FROM annonces ORDER BY id DESC LIMIT 1");//TODO:la refaire autrement (mettre le id annonce dans la session pour la récupérer lors du upload image)
               //$pstmt->execute();
               $derniereAnnonce = $pstmt->fetch();
               $pstmt->closeCursor();
@@ -122,30 +158,42 @@ class AnnonceDAO {
             }
     }
 
-    public static function uploaderImagesAnnonce($idImage, $idAnnonce,$filename,$path)
-    //public static function uploaderImagesAnnonce($idannonce)//test
-    {
-            $db = Database::getInstance();
-            try {
-                $pstmt = $db->prepare("INSERT INTO imgsannonces (idimage,idannonce,filename,path)
-                                       VALUES (:a,:b,:c,:d)");
-                $pstmt->execute(array(':a' => htmlspecialchars($idImage),
-                                      ':b' => htmlspecialchars($idAnnonce),
-                                      ':c' => htmlspecialchars($filename),
-                                      ':d' => htmlspecialchars($path)
+    public static function ajouterImageAnnonce($idannonce, $img)
+  {
+          $db = Database::getInstance();
+          try {
+              $pstmt = $db->prepare("UPDATE annonces SET imgannonce = :img
+                                     WHERE idannonce = :id");
+              $pstmt->execute(array(':img' => htmlspecialchars($img),
+                                    ':id' => htmlspecialchars($idannonce)
                                     ));
-                                    /*$pstmt->execute(array(':a' => 's4444me',
-                                                          ':b' =>  $idannonce,
-                                                          ':c' => 'dd',
-                                                          ':d' => 'dd'
-                                                        ));*///test
-                $pstmt->closeCursor();
-                $pstmt = NULL;
-                Database::close();
-            }
-            catch (PDOException $ex){
-            }
-    }
+              $pstmt->closeCursor();
+              $pstmt = NULL;
+              Database::close();
+          }
+          catch (PDOException $ex){
+          }
+  }
+
+  //TODO : A enlever, plus besoin => migrer dans ImagesDAO
+  public static function uploaderImagesAnnonce($idImage, $idAnnonce,$filename,$path)
+  {
+          $db = Database::getInstance();
+          try {
+              $pstmt = $db->prepare("INSERT INTO imgsannonces (idimage,idannonce,filename,path)
+                                     VALUES (:a,:b,:c,:d)");
+              $pstmt->execute(array(':a' => htmlspecialchars($idImage),
+                                    ':b' => htmlspecialchars($idAnnonce),
+                                    ':c' => htmlspecialchars($filename),
+                                    ':d' => htmlspecialchars($path)
+                                  ));
+              $pstmt->closeCursor();
+              $pstmt = NULL;
+              Database::close();
+          }
+          catch (PDOException $ex){
+          }
+  }
 
     public static function chercherIdMarker($value)
     {
