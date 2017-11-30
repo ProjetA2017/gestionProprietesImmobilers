@@ -2,8 +2,8 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><h4><a href="index.php">Maison/Appartement</a></h4> en Location</span>
-    <h2>Achat, Vente & Location</h2>
+    <span class="pull-right"><h4><a href="index.php">Maisons/Appartement/Bureaux</a></h4> Vente ou Location</span>
+    <h2>Propriétés disponibles</h2>
 </div>
 </div>
 <!-- banner -->
@@ -20,9 +20,9 @@
     <div class="row">
             <div class="col-lg-5">
               <select class="form-control">
-                <option>Acheter</option>
-                <option>Louer</option>
-                <option>Vendre</option>
+                <option selected="selected" disbaled="disabled">À</option>
+                <option>louer</option>
+                <option>vendre</option>
               </select>
             </div>
             <div class="col-lg-7">
@@ -39,14 +39,14 @@
           <div class="row">
           <div class="col-lg-12">
               <select class="form-control">
-                <option>Type</option>
-                <option>Apartment</option>
-                <option>Building</option>
-                <option>Office Space</option>
+                <option selected="selected" disbaled="disabled">Type</option>
+                <option>Apartements</option>
+                <option>Espaces de bureaux</option>
+                <option>Maisons</option>
               </select>
               </div>
           </div>
-          <button class="btn btn-primary">Chercher</button>
+          <button class="btn btn-primary">Filtrer</button>
   </div>
 
 
@@ -86,7 +86,7 @@
 
 <div class="col-lg-9 col-sm-8">
 <div class="sortby clearfix">
-<div class="pull-left result">Affcihage : 12 de 100 </div>
+<div class="pull-left result">Affichage : 12 de 100 </div>
   <div class="pull-right">
   <select class="form-control">
   <option>Trié par</option>
@@ -97,175 +97,29 @@
 </div>
 <div class="row">
 
-     <!-- properties -->
+     <!-- liste properties -->
+     <?php foreach ($_SESSION['lesAnnonces'] as $row) {
+        $tatus = ($row['status']=='Disponble'?'status new':'status sold');
+        $prix = ($row['typeannonce']=='location'?'$ par mois':'$');
+     ?>
       <div class="col-lg-4 col-sm-6">
       <div class="properties">
-        <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Vendu</div>
+        <div class="image-holder"><img src="upload/imagesAnnonces/<?=$row['imgannonce']?>" class="img-responsive" alt="properties">
+          <div class="<?=$tatus?>"><?=$row['status']?></div>
         </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
+        <h4><a href="?action=pageDetails">Compagnie Propriétés</a></h4>
+        <p class="price">Prix : <?=number_format($row['prix'])?> <?=$prix?></p>
+        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typeannonce']?>">!</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typelogement']?>">?</span>
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Diffusée depuis : <?=$row['dateannonce']?>">*</span> </div>
+        <a class="btn btn-primary" href="?action=pageDetails&idannonce=<?=$row['idannonce']?>">Voir les détails</a>
       </div>
       </div>
-      <!-- properties -->
+      <?php } ?>
+    <!-- liste properties -->
 
 
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/4.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/4.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/4.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-
-      <!-- properties -->
-      <div class="col-lg-4 col-sm-6">
-      <div class="properties">
-        <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties">
-          <div class="status sold">Sold</div>
-        </div>
-        <h4><a href="?action=pageDetails">Royal Inn</a></h4>
-        <p class="price">Prix : $234,900</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Chambres">5</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Salons">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">1</span> </div>
-        <a class="btn btn-primary" href="?action=pageDetails">Voir les détails</a>
-      </div>
-      </div>
-      <!-- properties -->
-      <div class="center">
-<ul class="pagination">
+<div class="center">
+        <ul class="pagination">
           <li><a href="#">«</a></li>
           <li><a href="#">1</a></li>
           <li><a href="#">2</a></li>

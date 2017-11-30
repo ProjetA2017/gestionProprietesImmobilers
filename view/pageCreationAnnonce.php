@@ -14,7 +14,7 @@
       <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
         <form role="form">
           <div>
-              <input value="creerAnnonceAjax" name="action" type="hidden" />
+              <input value="creerAnnonce" name="action" type="hidden" />
               <input type="hidden"  name="latitude" id="lat" value="" />
               <input type="hidden"  name="longitude" id="long" value="" />
               <input type="text" class="form-control" placeholder="Identifiant" name="identifiant" id="identifiant" value="<?=$_SESSION['membre']->getIdentifiant()?>" readonly="readonly">

@@ -74,4 +74,33 @@ class AnnonceAppartDAO {
             catch (PDOException $ex){
             }
     }
+
+    public static function modifierAnnonceAppart($annonceAppart)
+    {
+        $db = Database::getInstance();
+        try {
+            $pstmt = $db->prepare("UPDATE annoncesapparts SET typeannonce = :typeannonce,
+                                                       nbrpieces = :nbrpieces,
+                                                       position = :position,
+                                                       animauxpermis = :animauxpermis,
+                                                       inclus = :inclus,
+                                                       infosupplementaire = :infosupplementaire
+                                  WHERE idannonce = :idannonce");
+            $pstmt->execute(array(':typeannonce' => htmlspecialchars($annonceAppart->getTypeAnnonce()),
+                                  ':nbrpieces' => htmlspecialchars($annonceAppart->getNbrPieces()),
+                                  ':position' => htmlspecialchars($annonceAppart->getPosition()),
+                                  ':animauxpermis' => htmlspecialchars($annonceAppart->getIsAnimauxPermis()),
+                                  ':inclus' => htmlspecialchars($annonceAppart->getInclus()),
+                                  ':infosupplementaire' => htmlspecialchars($annonceAppart->getInfoSupplementaire()),
+                                  ':idannonce' => htmlspecialchars($annonceAppart->getIdAnnonce())
+                                ));
+            $pstmt->closeCursor();
+            $pstmt = NULL;
+
+            Database::close();
+        } catch (PDOException $ex)
+            {
+
+            }
+    }
 }

@@ -10,7 +10,9 @@ class MarkersCarteAction implements Action, RequestAjaxAction {
 			{
 				GereAnnonce::chargerMarkersCarteUneAnnonce();
 				UNSET($_SESSION['annonceAafficher']);
-			}	else	GereAnnonce::chargerMarkersCarte();
-      //return "rien";
+			}
+			else
+				GereAnnonce::chargerMarkersCarte();
+      //return "rien";TODO: enlever les commentaires
 		}
 }//fIN CLASSE

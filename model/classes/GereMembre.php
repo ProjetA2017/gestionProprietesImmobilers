@@ -103,7 +103,7 @@ class GereMembre {
             /*$_SESSION['donnesMembre']["connected"] = $identifiant;
             $_SESSION['donnesMembre']["nom"] = $nom;
             $_SESSION['donnesMembre']["prenom"] = $prenom;*/
-            $_SESSION['membre']=$membre; 
+            $_SESSION['membre']=$membre;
         }
         return $resultat;
     }

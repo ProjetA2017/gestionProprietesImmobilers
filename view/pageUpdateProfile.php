@@ -1,7 +1,5 @@
 <?php include'header.php';?>
 
-
-
 <div class="inside-banner">
   <div class="container">
     <span class="pull-right"><a href="index.php">Accueil</a></span>
@@ -27,16 +25,16 @@
             <div class="form-inline">
               <input type="text" class="form-control" placeholder="Adresse" name="adresse" id="adresse" value="<?= $_SESSION['adresse'] ?>">
             </div>
-            <label><b>Ville :</b></label>  
+            <label><b>Ville :</b></label>
             <input type="text" class="form-control" placeholder="Ville" name="ville" id="ville" value="<?= $_SESSION['ville'] ?>">
-            <label><b>Pays :</b></label>  
+            <label><b>Pays :</b></label>
             <input type="text" class="form-control" placeholder="Pays" name="pays" id="pays" value="<?= $_SESSION['pays'] ?>">
-            <label><b>Téléphone : <span style="color:gray">(optionel)</span></b></label>  
+            <label><b>Téléphone : <span style="color:gray">(optionel)</span></b></label>
             <input type="Tel" class="form-control" placeholder="Téléphone" name = "telp" id="telp" value="<?= $_SESSION['telephone'] ?>" maxlength="10">
           </div>
           <button type="submit" class="btn btn-success" name="btnEnregistrer" >Enregistrer</button>
         </form>
-        
+
       </div>
     </div>
   </div>
@@ -44,7 +42,7 @@
 
 <script>
 $(document).ready(function(){
-  $('#telp').keyup(function () { 
+  $('#telp').keyup(function () {
     this.value = this.value.replace(/[^0-9\.]/g,'');
   });
 })

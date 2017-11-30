@@ -1,5 +1,23 @@
-<?php include'header.php';?>
+<?php
 
+include 'header.php';
+if(isset($_SESSION['annonceAafficher'])) {
+  var_dump($_SESSION['annonceAafficher']);
+  $longitude = $_SESSION['annonceAafficher']->longitude;
+  $latitude = $_SESSION['annonceAafficher']->latitude;
+  $zoom = 17;
+} else {
+    $latitude = 45.50884;
+    $longitude = -73.58781;
+    $zoom = 10;
+}
+var_dump($longitude);
+var_dump($latitude);
+var_dump($zoom);
+?>
+<input type="hidden" id="afficheLatitude" value="<?=$latitude?>">
+<input type="hidden" id="afficheLongitude" value="<?=$longitude?>">
+<input type="hidden" id="afficheZoom" value="<?=$zoom?>">
 <div class="col-lg-12 ">
     <div class="container">
         <div class="well" id="dispoInline">

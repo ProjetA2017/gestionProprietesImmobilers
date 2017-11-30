@@ -115,6 +115,7 @@
 
         </div>
         <ul class="dropdown-menu" style="margin: 0px 0px; min-width: 0px;">
+          <li style="padding:5px 5px 0px 5px; margin-bottom: 0px;" ><a href="?action=afficherEspaceMembre" style="font-size:15px;">Mes annonces</a></li>
           <li style="padding:5px 5px 0px 5px; margin-bottom: 0px;" ><a href="?action=updateProfile" style="font-size:15px;">Éditer profile</a></li>
           <li style="padding:5px 5px 0px 5px; margin-bottom: 0px;" ><a href="?action=updateMotDePasse" style="font-size:15px;">Modifier mot de passe</a></li>
           <li style="padding:5px 5px 0px 5px; margin-bottom: 0px;" ><a href="?action=deconnection" style="font-size:15px;">Se déconnecter</a></li>

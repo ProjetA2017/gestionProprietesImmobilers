@@ -7,6 +7,6 @@ class TestAction implements Action, RequestAjaxAction {
 			GereAnnonce::chargerMarkersCarte();
 			//GereAnnonce::uploaderImages();
 			//GereAffichageAccueil::afficherAnnoncesAccueil();
-      //return "test";
+      //return "test";TODO: enlever les commentaires
 }
 }

@@ -87,7 +87,7 @@ public static function uploaderImages() {
     //$idannonceur = $_SESSION['connected'];
     $dao = new AnnonceDAO();
     $daoImg = new ImagesDAO();
-    $idannonce = $dao->findLastAnnonce();
+    $idannonce = $dao->findLastAnnonce();//TODO:if isset une annonce d'ailleur =>recupérer idannonce avec $_REQEST sion recupérer la dernièr idannoce
     $chemin = "upload/imagesAnnonces/";
     $filename=/*$NomImageChoisie;*/$_FILES['file']['name'];
     $idImage = $idannonce."-".$filename;
@@ -107,7 +107,8 @@ public static function uploaderImages() {
     if ($continuer){
         $annonce = $dao->findAnnonce($idannonce);
         $_SESSION['lannonce'] = $annonce->getImgAnnonce();
-        if($annonce->getImgAnnonce() == NULL) {
+        //if($annonce->getImgAnnonce() == NULL) {
+        if($annonce->getImgAnnonce() == 'default.jpg') {
           $dao->ajouterImageAnnonce($idannonce, $idImage);
         }
         $daoImg->uploaderImagesAnnonce($idImage, $idannonce,$filename,$path);

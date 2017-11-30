@@ -1,8 +1,15 @@
 function initMap() {
+  alert('test');
+    var latitude = parseFloat(document.getElementById("afficheLatitude").value);
+    alert(latitude);
+    var longitude = parseFloat(document.getElementById("afficheLongitude").value);
+    alert(longitude);
+    var zoomer = parseInt(document.getElementById("afficheZoom").value);
+    alert(zoomer);
+    alert(latitude + " et " + longitude + " et " + zoomer);
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: new google.maps.LatLng(45.50884, -73.58781),
-        zoom: 10
-
+        center: new google.maps.LatLng(latitude, longitude),
+        zoom: zoomer
     });
     var infoWindow = new google.maps.InfoWindow;
 

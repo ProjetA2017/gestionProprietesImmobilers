@@ -1,4 +1,22 @@
-<?php include'header.php';?>
+<?php
+var_dump($_REQUEST['annonceAafficher']);
+include 'header.php';
+if(isset($_REQUEST['annonceAafficher'])) {
+  $longitude = $_REQUEST['annonceAafficher']->longitude;
+  $latitude = $_REQUEST['annonceAafficher']->latitude;
+  $zoom = 17;
+} else {
+  $latitude = 45.50884;
+  $longitude = -73.58781;
+  $zoom = 10;
+}
+var_dump($longitude);
+var_dump($latitude);
+var_dump($zoom);
+?>
+<input type="hidden" id="afficheLatitude" value="<?=$latitude?>">
+<input type="hidden" id="afficheLongitude" value="<?=$longitude?>">
+<input type="hidden" id="afficheZoom" value="<?=$zoom?>">
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
@@ -25,7 +43,7 @@
               <div class="col-lg-4 col-sm-5"><img src="upload/imagesAnnonces/<?=$image?>" class="img-responsive img-circle" alt="properties"/></div>
               <div class="col-lg-8 col-sm-7">
                 <h5><a href="?action=pageDetails&idannonce=<?=$row['idannonce']?>">Plus de détails</a></h5>
-                <p class="price"><?=$row['prix']?> $</p> </div>
+                <p class="price"><?=number_format($row['prix'])?> $</p> </div>
           </div>
           <?php } ?>
         </div>
@@ -38,7 +56,7 @@
       </div>
 
       <div class="col-lg-9 col-sm-8 ">
-      <h2><?=$_SESSION['annonceAafficher']->status?></h2>
+      <h2><?=$_REQUEST['annonceAafficher']->status?></h2>
       <div class="row">
         <div class="col-lg-8">
         <div class="property-images">
@@ -52,16 +70,20 @@
               <li data-target="#myCarousel" data-slide-to="3" class=""></li>
             </ol>
             <div class="carousel-inner">
-              <?php
-                $indice = 0;
-                foreach ($_REQUEST['imagesDeLannonce'] as $row) {
-                $image = ($row['idimage'] == NULL ? "default.jpg" : $row['idimage']);
-                $indice++;
-                $item = ($indice == 1 ? "item active" : "item");
+              <?php if(count($_REQUEST['imagesDeLannonce'])) {
+                    $indice = 0;
+                    foreach ($_REQUEST['imagesDeLannonce'] as $row) {
+                    $image = ($row['idimage'] == NULL ? "default.jpg" : $row['idimage']);
+                    $indice++;
+                    $item = ($indice == 1 ? "item active" : "item");
               ?>
-              <div class="<?=$item?>">
-                <img src="upload/imagesAnnonces/<?=$image?>" class="properties" alt="properties" />
-              </div>
+                  <div class="<?=$item?>">
+                    <img src="upload/imagesAnnonces/<?=$image?>" class="properties" alt="properties" />
+                  </div>
+              <?php } } else { ?>
+                <div class="item active">
+                  <img src="upload/imagesAnnonces/default.jpg" class="properties" alt="properties" />
+                </div>
               <?php } ?>
             </div>
             <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
@@ -75,38 +97,39 @@
 
 
         <div class="spacer"><h4><span class="glyphicon glyphicon-th-list"></span> Détails propriété</h4>
-        <p>Inclus : <?=$_SESSION['annonceAafficher']->inclus?></p>
-        <p><?=$_SESSION['annonceAafficher']->infosupplementaire?></p>
+        <p>Inclus : <?=$_REQUEST['annonceAafficher']->inclus?></p>
+        <p><?=$_REQUEST['annonceAafficher']->infosupplementaire?></p>
 
         </div>
         <div><h4><span class="glyphicon glyphicon-map-marker"></span> Localisation</h4>
-      <div id="map" class="well"><iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
+      <div id="map" class="well"><iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
         </div>
 
         </div>
         <div class="col-lg-4">
         <div class="col-lg-12  col-sm-6">
       <div class="property-info">
-      <p class="price">$ <?=$_SESSION['annonceAafficher']->prix?></p>
-        <p class="area"><span class="glyphicon glyphicon-map-marker"></span> <?=$_SESSION['annonceAafficher']->adresse?></p>
+      <?php $prix = ($_REQUEST['annonceAafficher']->typeannonce == 'location' ? '$ par mois'  : '$');?>
+      <p class="price"><?=number_format($_REQUEST['annonceAafficher']->prix)?> <?=$prix?></p>
+        <p class="area"><span class="glyphicon glyphicon-map-marker"></span> <?=$_REQUEST['annonceAafficher']->adresse?></p>
 
         <div class="profile">
         <span class="glyphicon glyphicon-user"></span> Annonceur
-        <p><?=$_SESSION['annonceAafficher']->nfamille?> <?=$_SESSION['annonceAafficher']->prenom?></p>
+        <p><?=$_REQUEST['annonceAafficher']->nfamille?> <?=$_REQUEST['annonceAafficher']->prenom?></p>
         </div>
 
         <span class="glyphicon glyphicon-calendar"></span> Date d'annonce
-        <p>Diffusée le : <?=$_SESSION['annonceAafficher']->dateannonce?></p>
+        <p>Diffusée le : <?=$_REQUEST['annonceAafficher']->dateannonce?></p>
       </div>
 
         <h6><span class="glyphicon glyphicon-home"></span> Spécificités</h6>
         <div class="listing-detail">
           <?php
-            $typeannonce = ($_SESSION['annonceAafficher']->typeannonce == "vente" ? "vendre" : "louer");
-            $nbrSelon = ($_SESSION['annonceAafficher']->typelogement == "bureaux" ? "Nombre employés" : "Nombre Chambre");
-            if($_SESSION['annonceAafficher']->typelogement == "bureaux") $chiffreSelon = $_SESSION['annonceAafficher']->nbremployes;
-            if($_SESSION['annonceAafficher']->typelogement == "maison") $chiffreSelon = $_SESSION['annonceAafficher']->nbrchambres;
-            if($_SESSION['annonceAafficher']->typelogement == "appartement") $chiffreSelon = $_SESSION['annonceAafficher']->nbrpieces;
+            $typeannonce = ($_REQUEST['annonceAafficher']->typeannonce == "vente" ? "vendre" : "louer");
+            $nbrSelon = ($_REQUEST['annonceAafficher']->typelogement == "bureaux" ? "Nombre d'employés" : "Nombre de chambres");
+            if($_REQUEST['annonceAafficher']->typelogement == "bureaux") $chiffreSelon = $_REQUEST['annonceAafficher']->nbremployes;
+            if($_REQUEST['annonceAafficher']->typelogement == "maison") $chiffreSelon = $_REQUEST['annonceAafficher']->nbrchambres;
+            if($_REQUEST['annonceAafficher']->typelogement == "appartement") $chiffreSelon = $_REQUEST['annonceAafficher']->nbrpieces;
            ?>
           <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$nbrSelon?>"><?=$chiffreSelon?></span>
           <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$typeannonce?>">À</span>

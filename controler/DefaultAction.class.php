@@ -6,7 +6,7 @@ class DefaultAction implements Action {
 		if (!ISSET($_SESSION)) session_start();
 		GereAffichageAccueil::afficherAnnoncesAccueil();
 		return "accueil";
-		//return "test";
+		//return "test";TODO: enlever les commentaires
 	}
 }
 ?>

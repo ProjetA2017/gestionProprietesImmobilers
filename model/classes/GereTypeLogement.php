@@ -9,7 +9,7 @@ require_once 'model/dao/AnnonceDAO.php';
 require_once 'model/classes/Services.class.php';
 
 class GereTypeLogement {
-  public static function creerUneAnnonceAppart($idannonce, $typeAnnonce) {
+  public static function creerUneAnnonceAppart($idannonce, $typeAnnonce, $typetraitement) {
       if (!ISSET($_SESSION)) {
         session_start();
       }
@@ -22,7 +22,7 @@ class GereTypeLogement {
       if(ISSET($_REQUEST['position']))  $position = $_REQUEST['position'];
         else $position = "null";
 
-      if(ISSET($_REQUEST['animal'])) $isAnimauxPermis = ($_REQUEST['animal'] == 'oui' ? true : false);
+      if(ISSET($_REQUEST['animal'])) $isAnimauxPermis = $_REQUEST['animal'];
         else $isAnimauxPermis = "null";
 
       $inclus = "";
@@ -49,6 +49,8 @@ class GereTypeLogement {
              $_SESSION["messageErreurCreationCompte"]["identifiant"] = "annonce déjà existante";
              return FALSE;
           }*/
+
+      $_REQUEST['typetraitement']=$typetraitement;
       $annonceAppart = new AnnonceAppart();
       $annonceAppart->setIdAnnonce($idannonce);
       $annonceAppart->setTypeAnnonce($typeAnnonce);
@@ -57,21 +59,20 @@ class GereTypeLogement {
       $annonceAppart->setIsAnimauxPermis($isAnimauxPermis);
       $annonceAppart->setInclus($inclus);
       $annonceAppart->setInfoSupplementaire($infos);
-      $dao->createAnnonceAppart($annonceAppart);
+      if($typetraitement == 'creation')
+        $dao->createAnnonceAppart($annonceAppart);
+      if($typetraitement == 'modification')
+        $dao->modifierAnnonceAppart($annonceAppart);
+      /*if(ISSET($_REQUEST['typetraitement']) &&  $_REQUEST['typetraitement'] == 'modification')
+        $dao->modifierAnnonceAppart($annonceAppart);*/
      // }
       //return $resultat;
       //pour les tests :
-      /*$_SESSION['tabTest'] = array();
-      array_push($_SESSION['tabTest'] ,$idannonce);
-      array_push($_SESSION['tabTest'] ,$_REQUEST['typeAnnonce']);
-      array_push($_SESSION['tabTest'] ,$nbrPieces);
-      array_push($_SESSION['tabTest'] ,$position);
-      array_push($_SESSION['tabTest'] ,$isAnimauxPermis);
-      array_push($_SESSION['tabTest'] ,$inclus);
-      array_push($_SESSION['tabTest'] ,$infos);*/
+      $_REQUEST['tabTest'] = $annonceAppart;
+
   }
 
-  public static function creerUneAnnonceMaison($idannonce, $typeAnnonce) {
+  public static function creerUneAnnonceMaison($idannonce, $typeAnnonce, $typetraitement) {
       if (!ISSET($_SESSION)) {
         session_start();
       }
@@ -82,7 +83,7 @@ class GereTypeLogement {
         else $nbrChambres = "null";
 
       $inclus = "";
-      $tabInclus = $_REQUEST['includeMaison'];
+      //$tabInclus = $_REQUEST['includeMaison'];
       if(!isset($_REQUEST['includeMaison']) || empty($_REQUEST['includeMaison']))   $inclus = "null";
         else
           {
@@ -111,19 +112,18 @@ class GereTypeLogement {
       $annonceMaison->setNbrChambres($nbrChambres);
       $annonceMaison->setInclus($inclus);
       $annonceMaison->setInfoSupplementaire($infos);
-      $dao->createAnnonceMaison($annonceMaison);
+      if($typetraitement == 'creation')
+        $dao->createAnnonceMaison($annonceMaison);
+      if($typetraitement == 'modification')
+        $dao->modifierAnnonceMaison($annonceMaison);
      // }
       //return $resultat;
       //pour les tests :
-      /*$_SESSION['tabTest'] = array();
-      array_push($_SESSION['tabTest'] ,$idannonce);
-      array_push($_SESSION['tabTest'] ,$_REQUEST['typeAnnonce']);
-      array_push($_SESSION['tabTest'] ,$nbrChambres);
-      array_push($_SESSION['tabTest'] ,$inclus);
-      array_push($_SESSION['tabTest'] ,$infos);*/
+      $_REQUEST['tabTest'] = $annonceMaison;
+      $_REQUEST['typetraitement']=$typetraitement;
   }
 
-  public static function creerUneAnnonceBureaux($idannonce, $typeAnnonce) {
+  public static function creerUneAnnonceBureaux($idannonce, $typeAnnonce, $typetraitement) {
       if (!ISSET($_SESSION)) {
         session_start();
       }
@@ -134,7 +134,7 @@ class GereTypeLogement {
         else $nbrEmployes = "null";
 
       $inclus = "";
-      $tabInclus = $_REQUEST['includeBur'];
+      //$tabInclus = $_REQUEST['includeBur'];
       if(!isset($_REQUEST['includeBur']) || empty($_REQUEST['includeBur']))   $inclus = "null";
         else
           {
@@ -163,15 +163,14 @@ class GereTypeLogement {
       $annonceBureaux->setNbrEmployes($nbrEmployes);
       $annonceBureaux->setInclus($inclus);
       $annonceBureaux->setInfoSupplementaire($infos);
-      $dao->createAnnonceBureaux($annonceBureaux);
+      if($typetraitement == 'creation')
+        $dao->createAnnonceBureaux($annonceBureaux);
+      if($typetraitement == 'modification')
+        $dao->modifierAnnonceBureaux($annonceBureaux);
      // }
       //return $resultat;
       //pour les tests :
-      /*$_SESSION['tabTest'] = array();
-      array_push($_SESSION['tabTest'] ,$idannonce);
-      array_push($_SESSION['tabTest'] ,$_REQUEST['typeAnnonce']);
-      array_push($_SESSION['tabTest'] ,$nbrEmployes);
-      array_push($_SESSION['tabTest'] ,$inclus);
-      array_push($_SESSION['tabTest'] ,$infos);*/
+      $_REQUEST['tabTest'] = $annonceBureaux;
+      $_REQUEST['typetraitement']=$typetraitement;
   }
 }

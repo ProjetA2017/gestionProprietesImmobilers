@@ -6,7 +6,7 @@ class UploadImagesAction implements Action, RequestAjaxAction {
 		require_once './model/classes/GereImages.php';
 			if (!ISSET($_SESSION)) session_start();
 			GereImages::uploaderImages();
-			//GereAnnonce::uploaderImages();//fonctionne
+			//GereAnnonce::uploaderImages();//fonctionne// TODO: enlever les commentaires
 	}
 }
 ?>

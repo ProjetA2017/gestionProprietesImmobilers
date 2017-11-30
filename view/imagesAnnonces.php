@@ -1,4 +1,8 @@
-<?php include 'header.php';?>
+<?php include 'header.php';
+var_dump($_REQUEST['tabTest']);
+var_dump($_REQUEST['typetraitement']);
+var_dump($_REQUEST['tabTest2']);
+?>
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">

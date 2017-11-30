@@ -13,7 +13,7 @@
               <blockquote>
               <p class="location"><span class="glyphicon glyphicon-map-marker"></span> <?=$row['adresse']?></p>
               <!--<p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p>-->
-              <cite><?=$row['prix']?> $</cite>
+              <cite><?=number_format($row['prix'])?> $</cite>
               </blockquote>
             </div>
           </div>
@@ -69,14 +69,18 @@
   </div>
     <h2>Présentation des propriétés</h2>
     <div id="owl-example" class="owl-carousel">
-<?php foreach ($_SESSION['lesAnnonces'] as $row) { ?>
+<?php foreach ($_SESSION['lesAnnonces'] as $row) {
+  $tatus = ($row['status']=='Disponble'?'status new':'status sold');
+  $prix = ($row['typeannonce']=='location'?'$ par mois':'$');
+?>
       <div class="properties">
         <div class="image-holder"><img src="upload/imagesAnnonces/<?=$row['imgannonce']?>" class="img-responsive" alt="properties"/>
-          <div class="status new"><?=$row['status']?></div>
+          <div class="<?=$tatus?>"><?=$row['status']?></div>
         </div>
-        <h4><a href="?action=pageDetails">Khaoula Lmhboula</a></h4>
-        <p class="price">Prix : <?=$row['prix']?> $</p>
-        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typeannonce']?>">!</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typelogement']?>">?</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Stationnement">2</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cuisines">1</span> </div>
+        <h4><a href="?action=pageDetails">Compagnie Propriétés</a></h4>
+        <p class="price">Prix : <?=number_format($row['prix'])?> <?=$prix?></p>
+        <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typeannonce']?>">!</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typelogement']?>">?</span>
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Diffusée depuis : <?=$row['dateannonce']?>">*</span> </div>
         <a class="btn btn-primary" href="?action=pageDetails&idannonce=<?=$row['idannonce']?>">Voir les détails</a>
       </div>
 <?php } ?>
@@ -115,7 +119,7 @@
                   <div class="col-lg-4"><img src="upload/imagesAnnonces/<?=$image?>" class="img-responsive" alt="<?=$row['typelogement']?>"/></div>
                   <div class="col-lg-8">
                     <h5><a><?=$row['status']?></a></h5>
-                    <p class="price"><?=$row['prix']?> $</p>
+                    <p class="price"><?=number_format($row['prix'])?> $</p>
                     <a href="?action=pageDetails&idannonce=<?=$row['idannonce']?>" class="more">Plus de détails</a> </div>
                 </div>
               </div>

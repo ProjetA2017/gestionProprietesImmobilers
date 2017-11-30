@@ -68,13 +68,31 @@ class AnnonceDAO {
     }
   }
 
-
-
   public static function findAllAnnonces()
   {
     $db = Database::getInstance();
     try {
       $requete = 'SELECT * FROM annonces';
+      $pstmt = $db->query($requete);
+      $listeAnnonces = array();
+      foreach($pstmt as $row) {
+          array_push($listeAnnonces,$row);
+        }
+      $pstmt->closeCursor();
+      $pstmt = NULL;
+      Database::close();
+      return $listeAnnonces;
+    } catch (PDOException $e) {
+        print "Error!: ";// . $e->getMessage() . "<br/>";
+        return $listeAnnonces;
+    }
+  }
+
+  public static function findAllAnnoncesByMembre($idannonceur)
+  {
+    $db = Database::getInstance();
+    try {
+      $requete = 'SELECT * FROM annonces WHERE idannonceur = "'.$idannonceur.'"';
       $pstmt = $db->query($requete);
       $listeAnnonces = array();
       foreach($pstmt as $row) {
@@ -219,6 +237,59 @@ class AnnonceDAO {
         print "Error!: ";
         return $x;
       }
+    }
+
+    public function supprimerAnnonce($x) {
+      $db = Database::getInstance();
+      try
+      {
+        $request = "DELETE FROM annonces WHERE idannonce = '".$x."'";
+        return $db->exec($request);
+        $request->closeCursor();
+        $request = NULL;
+        Database::close();
+      }
+      catch(PDOException $e)
+      {
+        throw $e;
+      }
+    }
+
+    public static function modifierAnnonce($annonce)
+    {
+        $db = Database::getInstance();
+        try {
+            $pstmt = $db->prepare("UPDATE annonces SET latitude = :latitude,
+                                                       longitude = :longitude,
+                                                       adresse = :adresse,
+                                                       prix = :prix,
+                                                       typeannonce = :typeannonce,
+                                                       typelogement = :typelogement,
+                                                       status = :status,
+                                                       datetraitementannonce = :datetraitementannonce
+                                  WHERE idannonce = :idannonce");
+            $pstmt->execute(array(':latitude' => htmlspecialchars($annonce->getLatitude()),
+                                  ':longitude' => htmlspecialchars($annonce->getLongitude()),
+                                  ':adresse' => htmlspecialchars($annonce->getAdresse()),
+                                  ':prix' => htmlspecialchars($annonce->getPrix()),
+                                  ':typeannonce' => htmlspecialchars($annonce->getTypeAnnonce()),
+                                  ':typelogement' => htmlspecialchars($annonce->getTypeLogement()),
+                                  ':status' => htmlspecialchars($annonce->getStatus()),
+                                  ':datetraitementannonce' => htmlspecialchars($annonce->getDateTraitement()),
+                                  ':idannonce' => htmlspecialchars($annonce->getIdAnnonce())
+                                ));
+            /*return $pstmt = $db->exec("UPDATE annonces SET idannonceur = 'bbbbbbb', latitude = 30.000123, longitude = -75.000134,
+                                            prenom = 'prenom', nfamille = 'nfamille', adresse = 'adresse', prix = 1000, typeannonce = 'Vente',
+                                            typelogement = 'Appartement', status = 'Vendu', datetraitementannonce = NULL
+                                            WHERE idannonce = 'dris_maison_45.5486064_-73.60897339999997'");*/
+            $pstmt->closeCursor();
+            $pstmt = NULL;
+
+            Database::close();
+        } catch (PDOException $ex)
+            {
+
+            }
     }
 
 }

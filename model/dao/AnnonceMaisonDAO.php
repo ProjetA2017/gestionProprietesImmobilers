@@ -70,4 +70,29 @@ class AnnonceMaisonDAO {
             catch (PDOException $ex){
             }
     }
+
+    public static function modifierAnnonceMaison($annonceMaison)
+    {
+        $db = Database::getInstance();
+        try {
+            $pstmt = $db->prepare("UPDATE annoncesmaison SET typeannonce = :typeannonce,
+                                                       nbrchambres = :nbrchambres,
+                                                       inclus = :inclus,
+                                                       infosupplementaire = :infosupplementaire
+                                  WHERE idannonce = :idannonce");
+            $pstmt->execute(array(':typeannonce' => htmlspecialchars($annonceMaison->getTypeAnnonce()),
+                                  ':nbrchambres' => htmlspecialchars($annonceMaison->getNbrChambres()),
+                                  ':inclus' => htmlspecialchars($annonceMaison->getInclus()),
+                                  ':infosupplementaire' => htmlspecialchars($annonceMaison->getInfoSupplementaire()),
+                                  ':idannonce' => htmlspecialchars($annonceMaison->getIdAnnonce())
+                                ));
+            $pstmt->closeCursor();
+            $pstmt = NULL;
+
+            Database::close();
+        } catch (PDOException $ex)
+            {
+
+            }
+    }
 }

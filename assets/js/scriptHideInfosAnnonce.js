@@ -6,7 +6,30 @@ $(function(){
 	$("#infoLocationBur").hide();
   $("#infoLocationMaison").hide();
 
-  $("#typelogement, #typeAnnonce, #infoLocationMaison").change(function() {
+	$(document).ready(function() {
+    if ($("#typelogement").val() === "appartement" ) {
+    	$("#infoLocationBur").hide();
+      $("#infoLocationMaison").hide();
+      $("#infoLocation").show();
+    }
+  	else if ( $("#typelogement").val() === "bureaux" ) {
+    	$("#infoLocation").hide();
+      $("#infoLocationMaison").hide();
+    	$("#infoLocationBur").show();
+  	}
+    else if ($("#typelogement").val() === "maison" ) {
+      $("#infoLocation").hide();
+      $("#infoLocationBur").hide();
+      $("#infoLocationMaison").show();
+    }
+    else {
+      $("#infoLocation").hide();
+      $("#infoLocationBur").hide();
+      $("#infoLocationMaison").hide();
+    }
+  });
+
+	$("#typelogement, #typeAnnonce, #infoLocationMaison").change(function() {
     if ($("#typelogement").val() === "appartement" ) {
     	$("#infoLocationBur").hide();
       $("#infoLocationMaison").hide();

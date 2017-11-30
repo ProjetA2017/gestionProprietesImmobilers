@@ -6,7 +6,7 @@ require_once('./model/classes/Membre.class.php');
 class UpdateMotDePasseAction implements Action {
 	public function execute(){
 		if (!ISSET($_SESSION)) session_start();
-
+		//TODO: à refaire, passer par les classes de traitements
 		$error = False;
 		$user = $_SESSION['connected'];
 

@@ -72,4 +72,29 @@ class AnnonceBureauxDAO {
             }
     }
 
+    public static function modifierAnnonceBureaux($annonceBureaux)
+    {
+        $db = Database::getInstance();
+        try {
+            $pstmt = $db->prepare("UPDATE annoncesbureaux SET typeannonce = :typeannonce,
+                                                       nbremployes = :nbremployes,
+                                                       inclus = :inclus,
+                                                       infosupplementaire = :infosupplementaire
+                                  WHERE idannonce = :idannonce");
+            $pstmt->execute(array(':typeannonce' => htmlspecialchars($annonceBureaux->getTypeAnnonce()),
+                                  ':nbremployes' => htmlspecialchars($annonceBureaux->getNbrEmployes()),
+                                  ':inclus' => htmlspecialchars($annonceBureaux->getInclus()),
+                                  ':infosupplementaire' => htmlspecialchars($annonceBureaux->getInfoSupplementaire()),
+                                  ':idannonce' => htmlspecialchars($annonceBureaux->getIdAnnonce())
+                                ));
+            $pstmt->closeCursor();
+            $pstmt = NULL;
+
+            Database::close();
+        } catch (PDOException $ex)
+            {
+
+            }
+    }
+
 }

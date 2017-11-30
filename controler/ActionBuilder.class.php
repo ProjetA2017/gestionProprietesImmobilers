@@ -1,6 +1,7 @@
 <?php
 require_once('./controler/AboutAction.class.php');
 require_once('./controler/AfficherCarteAction.class.php');
+require_once('./controler/AfficherEspaceMembreAction.class.php');
 require_once('./controler/AgentsAction.class.php');
 require_once('./controler/AjoutImagesAction.class.php');
 require_once('./controler/BlogAction.class.php');
@@ -13,21 +14,25 @@ require_once('./controler/DefaultAction.class.php');
 require_once('./controler/DetailsAction.class.php');
 require_once('./controler/FormulaireAnnonceAction.class.php');
 require_once('./controler/FormulaireCompteAction.class.php');
+require_once('./controler/FormulaireModifierAnnonceAction.class.php');
 require_once('./controler/LoginAction.class.php');
 require_once('./controler/LogoutAction.class.php');
 require_once('./controler/MarkersCarteAction.class.php');
+require_once('./controler/ModifierAnnonceAction.class.php');
+require_once('./controler/SupprimerAnnonceAction.class.php');
 require_once('./controler/UpdateMotDePasseAction.class.php');
 require_once('./controler/UpdateProfileAction.class.php');
 require_once('./controler/UploadImagesAction.class.php');
 require_once('./controler/TestAction.class.php');
-//require_once('./controler/AjaxAnnonceAction.class.php');
-
 class ActionBuilder{
 	public static function getAction($nom){
 		switch ($nom)
 		{
 			case "afficherCarte" :
 				return new AfficherCarteAction();
+			break;
+			case "afficherEspaceMembre" :
+				return new AfficherEspaceMembreAction();
 			break;
 			case "ajouterImagesAnnonces" :
 				return new AjoutImagesAction();
@@ -38,7 +43,7 @@ class ActionBuilder{
 			case "creerCompteMembre" :
 				return new CreationCompteAction();
 			break;
-			case "creerAnnonceAjax" :
+			case "creerAnnonce" :
 				return new CreationAnnonceAction();
 			break;
 			case "chargerMarkersCarte" :
@@ -52,6 +57,12 @@ class ActionBuilder{
 			break;
 			case "formulaireAnnonce" :
 				return new FormulaireAnnonceAction();
+			break;
+			case "formulairModifierAnnonce" :
+				return new FormulaireModifierAnnonceAction();
+			break;
+			case "modifierAnnonce" :
+				return new ModifierAnnonceAction();
 			break;
 			case "pageAbout" :
 				return new AboutAction();
@@ -73,6 +84,9 @@ class ActionBuilder{
 			break;
 			case "pageBlogDetails" :
 				return new BlogDetailsAction();
+			break;
+			case "supprimerAnnonce" :
+				return new SupprimerAnnonceAction();
 			break;
 			case "uploaderImages" :
 				return new UploadImagesAction();

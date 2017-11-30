@@ -1,0 +1,3 @@
+Text pour projet locapp
+Welcome aboard !
+Your registration is now complete! You can log on all Acapela Group website's using your user name (or email adress) and password.
