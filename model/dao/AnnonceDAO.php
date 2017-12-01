@@ -278,10 +278,6 @@ class AnnonceDAO {
                                   ':datetraitementannonce' => htmlspecialchars($annonce->getDateTraitement()),
                                   ':idannonce' => htmlspecialchars($annonce->getIdAnnonce())
                                 ));
-            /*return $pstmt = $db->exec("UPDATE annonces SET idannonceur = 'bbbbbbb', latitude = 30.000123, longitude = -75.000134,
-                                            prenom = 'prenom', nfamille = 'nfamille', adresse = 'adresse', prix = 1000, typeannonce = 'Vente',
-                                            typelogement = 'Appartement', status = 'Vendu', datetraitementannonce = NULL
-                                            WHERE idannonce = 'dris_maison_45.5486064_-73.60897339999997'");*/
             $pstmt->closeCursor();
             $pstmt = NULL;
 
@@ -290,6 +286,96 @@ class AnnonceDAO {
             {
 
             }
+    }
+
+
+    //Utilisé pour la page recherche selon des critères et permettre la pagination
+    public static function getPage($numPage, $critere="toutes")
+    {
+          $requete = "";
+          $tableau = array();
+          $listeAnnonces = array();
+          $TAILLE_PAGE = 5;
+          //$liste = new ListeAffichage();//array() au lieu de list
+          $debut = ($numPage - 1)*$TAILLE_PAGE;
+          $pstmt = "";
+          $afficher = "";
+          if ($critere[0]=='2') $afficher="date";
+          else if ($critere == "toutes") $afficher="toutes";
+          else if ($critere == "location" || $critere == "vente") $afficher="typeannonce";
+          else $afficher="ville";
+      try {
+            $db = Database::getInstance();
+            switch ($afficher) {
+                case  "toutes" :
+                    $pstmtNbr = $db->query("SELECT COUNT(idannonce) AS nbrannonces FROM annonces");
+                    $Nbr = $pstmtNbr->fetch();
+                    $tableau['nbrDeResultat'] = $Nbr['nbrannonces'];
+                    $pstmt = $db->prepare('SELECT * FROM annonces
+                                           ORDER BY dateannonce DESC LIMIT '.$debut.', '.$TAILLE_PAGE);
+                    $pstmt->execute();
+                break;
+
+                case  "typeannonce" :
+                    $pstmtNbr = $db->query("SELECT COUNT(idannonce) AS nbrannonces
+                                            FROM annonces WHERE typeannonce  = '.$critere.'");
+                    $Nbr = $pstmtNbr->fetch();
+                    $tableau['nbrDeResultat'] = $Nbr['nbrannonces'];
+                    $pstmt = $db->prepare('SELECT * FROM annonces WHERE typeannonce = "'.$critere.'"
+                                           ORDER BY IDENTIFIANT ASC LIMIT '.$debut.', '.$TAILLE_PAGE);
+                    $pstmt->execute();
+                break;
+
+                case  "date" :
+                    $_SESSION['ladate'] = $critere;
+                    $pstmtNbr = $db->query("SELECT COUNT(`user`.`IDENTIFIANT`) AS NBRUTILISATEURS
+                                            FROM `user`, `disponibilites`
+                                            WHERE `user`.IDENTIFIANT = `disponibilites`.IDENTIFIANT
+                                            AND `user`.VISIBLE = 1
+                                            AND DATE('".$critere."') BETWEEN `disponibilites`.DATEDEBUT AND `disponibilites`.DATEFIN");
+                    $Nbr = $pstmtNbr->fetch();
+                    $tableau['nbrDeResultat'] = $Nbr['NBRUTILISATEURS'];
+                    $pstmt = $db->prepare('SELECT `user`.*, `disponibilites`.`DATEDEBUT`, `disponibilites`.`DATEFIN`
+                                           FROM `user`, `disponibilites`
+                                           WHERE `user`.`IDENTIFIANT`=`disponibilites`.`IDENTIFIANT`
+                                           AND `user`.`VISIBLE`= 1 AND
+                                           /*DATE("'.$critere.'") BETWEEN `disponibilites`.`DATEDEBUT` AND `disponibilites`.`DATEFIN`*/
+                                           :critere BETWEEN `disponibilites`.`DATEDEBUT` AND `disponibilites`.`DATEFIN`
+                                           ORDER BY IDENTIFIANT ASC LIMIT '.$debut.', '.$TAILLE_PAGE);
+                    $pstmt->execute(array(':critere' => htmlspecialchars($critere)));
+                    //array(':critere' => htmlspecialchars($critere))
+                break;
+
+                case "ville" :
+                //default :
+                    $pstmtNbr = $db->query("SELECT COUNT(IDENTIFIANT) AS NBRUTILISATEURS FROM user
+                                            WHERE VISIBLE = 1 AND VILLE = '.$critere.'");
+                    $Nbr = $pstmtNbr->fetch();
+                    $tableau['nbrDeResultat'] = $Nbr['NBRUTILISATEURS'];
+                    $pstmt = $db->prepare('SELECT * FROM user WHERE VISIBLE = 1 AND VILLE = :critere
+                                 ORDER BY IDENTIFIANT ASC LIMIT '.$debut.', '.$TAILLE_PAGE);
+                    $pstmt->execute(array(':critere' => htmlspecialchars($critere)));
+            }
+
+             /*foreach($pstmt as $row) { //initial
+                $user = new Utilisateur();
+                $user->loadFromArray($row);
+                $liste->add($user);
+              }*/
+              foreach($pstmt as $row) {
+                  array_push($listeAnnonces,$row);
+                }
+              /*if($tableau['nbrDeResultat'] == 0)
+                $_SESSION["messagesNbrError"] = "0";*/
+              $tableau['liste'] = $listeAnnonces;
+              $pstmt->closeCursor();
+              $pstmt = null;
+              Database::close();
+              return $tableau;
+      } catch (PDOException $e) {
+          print "Error!: " . $e->getMessage() . "<br/>";
+          return $tableau;
+      }
     }
 
 }

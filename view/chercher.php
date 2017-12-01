@@ -19,10 +19,10 @@
     <input type="text" class="form-control" placeholder="Search of Properties">
     <div class="row">
             <div class="col-lg-5">
-              <select class="form-control">
-                <option selected="selected" disbaled="disabled">À</option>
-                <option>louer</option>
-                <option>vendre</option>
+              <select class="form-control" name = "typeannonce">
+                <option selected="selected" disbaled="disabled">Pour : </option>
+                <option>location</option>
+                <option>vente</option>
               </select>
             </div>
             <div class="col-lg-7">
@@ -86,7 +86,11 @@
 
 <div class="col-lg-9 col-sm-8">
 <div class="sortby clearfix">
-<div class="pull-left result">Affichage : 12 de 100 </div>
+  <?php
+    $nbrTotalAnnonces = $_SESSION['lesAnnoncesFiltres']['nbrDeResultat'];
+    $nbrAffichage = (5 * $_REQUEST['numPage'] < $nbrTotalAnnonces ? 5 * $_REQUEST['numPage'] : $nbrTotalAnnonces)
+  ?>
+<div class="pull-left result">Affichage : <?=$nbrAffichage?> de <?=$nbrTotalAnnonces?> </div>
   <div class="pull-right">
   <select class="form-control">
   <option>Trié par</option>
@@ -98,7 +102,7 @@
 <div class="row">
 
      <!-- liste properties -->
-     <?php foreach ($_SESSION['lesAnnonces'] as $row) {
+     <?php foreach ($_SESSION['lesAnnoncesFiltres']['liste'] as $row) {
         $tatus = ($row['status']=='Disponble'?'status new':'status sold');
         $prix = ($row['typeannonce']=='location'?'$ par mois':'$');
      ?>
@@ -116,8 +120,9 @@
       </div>
       <?php } ?>
     <!-- liste properties -->
-
-
+</div>
+<!-- pagination -->
+<!-- pagination initiale
 <div class="center">
         <ul class="pagination">
           <li><a href="#">«</a></li>
@@ -129,6 +134,30 @@
           <li><a href="#">»</a></li>
         </ul>
 </div>
+<!- - pagination initiale-->
+<div class="row">
+<?php if ($_REQUEST['nbrDePages'] > 1) { ?>
+    <div class="center">
+		  		<ul class="pagination">
+		    		<li>
+		      		<a href="?action=pageChercher&numPage=<?=($_REQUEST['numPage']>1 ? $_REQUEST['numPage']-1 : 1)?>">«</a>
+		    		</li>
+		    		<?php
+		    				for ($i=1;$i<=$_REQUEST['nbrDePages'];$i++) {
+		  	    				if ($i == $_REQUEST['numPage']) {
+		  									echo "<li><a><b style='color:black;'>".$i."</b></a></li>";
+		  	      			} else {
+		  									echo "<li><a href=\"./?action=pageChercher&numPage=".$i."\">".$i."</a></li>";
+		  	      			}
+		  	  			}
+		    		?>
+		    		<li>
+		      		<a href="?action=pageChercher&numPage=<?=($_REQUEST["numPage"] < $_REQUEST['nbrDePages'] ? $_REQUEST["numPage"]+1 : $_REQUEST["numPage"])?>">»</a>
+		    		</li>
+		  		</ul>
+		</div>
+<?php } ?>
+<!-- pagination -->
 
 </div>
 </div>

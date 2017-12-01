@@ -10,7 +10,7 @@ class UpdateProfileAction implements Action {
 		}
 
 		$user = $_SESSION['connected'];
-		if($membre = MembreDAO::findMembre($user)) { 
+		if($membre = MembreDAO::findMembre($user)) {
 
 			if(ISSET($_REQUEST['btnEnregistrer'])) {
 				$membre->setIdentifiant($_REQUEST['identifiant']);
@@ -22,7 +22,7 @@ class UpdateProfileAction implements Action {
 				$membre->setPays($_REQUEST['pays']);
 				$membre->setTelephone($_REQUEST['telp']);
 				MembreDAO::updateMembre($membre);
-				
+
 			}
 			$_SESSION['id'] = $membre->getIdentifiant();
 			$_SESSION['courriel'] = $membre->getCourriel();
@@ -33,7 +33,7 @@ class UpdateProfileAction implements Action {
 			$_SESSION['pays'] = $membre->getPays();
 			$_SESSION['telephone'] = $membre->getTelephone();
 			return "pageUpdateProfile";
-	    } 
+	    }
 		return "accueil";
 	}
 }
