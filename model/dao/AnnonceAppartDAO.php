@@ -103,4 +103,20 @@ class AnnonceAppartDAO {
 
             }
     }
+
+    public function supprimerAnnonceAppart($x) {
+      $db = Database::getInstance();
+      try
+      {
+        $request = "DELETE FROM annoncesapparts WHERE idannonce = '".$x."'";
+        return $db->exec($request);
+        $request->closeCursor();
+        $request = NULL;
+        Database::close();
+      }
+      catch(PDOException $e)
+      {
+        throw $e;
+      }
+    }
 }

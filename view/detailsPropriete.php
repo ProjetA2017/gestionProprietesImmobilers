@@ -1,5 +1,4 @@
 <?php
-//var_dump($_REQUEST['annonceAafficher']);
 include 'header.php';
 if(isset($_REQUEST['annonceAafficher'])) {
   $longitude = $_REQUEST['annonceAafficher']->longitude;
@@ -10,9 +9,6 @@ if(isset($_REQUEST['annonceAafficher'])) {
   $longitude = -73.58781;
   $zoom = 10;
 }
-/*var_dump($longitude);
-var_dump($latitude);
-var_dump($zoom);*/
 ?>
 <input type="hidden" id="afficheLatitude" value="<?=$latitude?>">
 <input type="hidden" id="afficheLongitude" value="<?=$longitude?>">
@@ -125,8 +121,13 @@ var_dump($zoom);*/
         <p><?=$_REQUEST['annonceAafficher']->nfamille?> <?=$_REQUEST['annonceAafficher']->prenom?></p>
         </div>
 
-        <span class="glyphicon glyphicon-calendar"></span> Date d'annonce
-        <p>Diffusée le : <?=$_REQUEST['annonceAafficher']->dateannonce?></p>
+        <span class="glyphicon glyphicon-calendar"></span> Date
+        <?php if($_REQUEST['annonceAafficher']->status == 'Loué' || $_REQUEST['annonceAafficher']->status == 'vendu')
+          $tooltipTxt = $_REQUEST['annonceAafficher']->status.' depuis : '.$_REQUEST['annonceAafficher']->datetraitementannonce;
+        else
+          $tooltipTxt = 'Disponible depuis : '.$_REQUEST['annonceAafficher']->dateannonce;
+        ?>
+        <p><?=$tooltipTxt?></p>
       </div>
 
         <h6><span class="glyphicon glyphicon-home"></span> Spécificités</h6>

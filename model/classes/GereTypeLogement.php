@@ -13,9 +13,6 @@ class GereTypeLogement {
       if (!ISSET($_SESSION)) {
         session_start();
       }
-      /*if (ISSET($_SESSION["messageErreurCreationCompte"])) {
-        UNSET($_SESSION["messageErreurCreationCompte"]);
-      }*/
       if(ISSET($_REQUEST['optNbrChambre']))  $nbrPieces = $_REQUEST['optNbrChambre'];
         else $nbrPieces = "null";
 
@@ -26,7 +23,6 @@ class GereTypeLogement {
         else $isAnimauxPermis = "null";
 
       $inclus = "";
-      //$tabInclus = $_REQUEST['IncludeApt'];
       if(!isset($_REQUEST['IncludeApt']) || empty($_REQUEST['IncludeApt']))   $inclus = "null";
         else
           {
@@ -37,19 +33,7 @@ class GereTypeLogement {
       if(ISSET($_REQUEST['infoAutreApt'])) $infos = $_REQUEST['infoAutreApt'];
         else $infos = "null";
 
-      //$resultat = TRUE;
-      /*if ($identifiant == "") {
-          $_SESSION["messageErreurCreationCompte"]["identifiant"] = "Identifiant obligatoire";
-          $resultat = FALSE;
-      }*/
-      //if ($resultat) {
       $dao = new AnnonceAppartDAO();
-         /* $annonce = $dao->findAnnonce($identifiant);
-          if ($annonce != NULL) {
-             $_SESSION["messageErreurCreationCompte"]["identifiant"] = "annonce déjà existante";
-             return FALSE;
-          }*/
-
       $_REQUEST['typetraitement']=$typetraitement;
       $annonceAppart = new AnnonceAppart();
       $annonceAppart->setIdAnnonce($idannonce);
@@ -63,27 +47,16 @@ class GereTypeLogement {
         $dao->createAnnonceAppart($annonceAppart);
       if($typetraitement == 'modification')
         $dao->modifierAnnonceAppart($annonceAppart);
-      /*if(ISSET($_REQUEST['typetraitement']) &&  $_REQUEST['typetraitement'] == 'modification')
-        $dao->modifierAnnonceAppart($annonceAppart);*/
-     // }
-      //return $resultat;
-      //pour les tests :
-      $_REQUEST['tabTest'] = $annonceAppart;
-
   }
 
   public static function creerUneAnnonceMaison($idannonce, $typeAnnonce, $typetraitement) {
       if (!ISSET($_SESSION)) {
         session_start();
       }
-      /*if (ISSET($_SESSION["messageErreurCreationCompte"])) {
-        UNSET($_SESSION["messageErreurCreationCompte"]);
-      }*/
       if(ISSET($_REQUEST['nbrCh']))  $nbrChambres = $_REQUEST['nbrCh'];
         else $nbrChambres = "null";
 
       $inclus = "";
-      //$tabInclus = $_REQUEST['includeMaison'];
       if(!isset($_REQUEST['includeMaison']) || empty($_REQUEST['includeMaison']))   $inclus = "null";
         else
           {
@@ -94,18 +67,7 @@ class GereTypeLogement {
       if(ISSET($_REQUEST['infoAutreMaison'])) $infos = $_REQUEST['infoAutreMaison'];
         else $infos = "null";
 
-      //$resultat = TRUE;
-      /*if ($identifiant == "") {
-          $_SESSION["messageErreurCreationCompte"]["identifiant"] = "Identifiant obligatoire";
-          $resultat = FALSE;
-      }*/
-      //if ($resultat) {
       $dao = new AnnonceMaisonDAO();
-         /* $annonce = $dao->findAnnonce($identifiant);
-          if ($annonce != NULL) {
-             $_SESSION["messageErreurCreationCompte"]["identifiant"] = "annonce déjà existante";
-             return FALSE;
-          }*/
       $annonceMaison = new AnnonceMaison();
       $annonceMaison->setIdAnnonce($idannonce);
       $annonceMaison->setTypeAnnonce($typeAnnonce);
@@ -116,10 +78,6 @@ class GereTypeLogement {
         $dao->createAnnonceMaison($annonceMaison);
       if($typetraitement == 'modification')
         $dao->modifierAnnonceMaison($annonceMaison);
-     // }
-      //return $resultat;
-      //pour les tests :
-      $_REQUEST['tabTest'] = $annonceMaison;
       $_REQUEST['typetraitement']=$typetraitement;
   }
 
@@ -127,14 +85,10 @@ class GereTypeLogement {
       if (!ISSET($_SESSION)) {
         session_start();
       }
-      /*if (ISSET($_SESSION["messageErreurCreationCompte"])) {
-        UNSET($_SESSION["messageErreurCreationCompte"]);
-      }*/
       if(ISSET($_REQUEST['nbrEmp']))  $nbrEmployes = $_REQUEST['nbrEmp'];
         else $nbrEmployes = "null";
 
       $inclus = "";
-      //$tabInclus = $_REQUEST['includeBur'];
       if(!isset($_REQUEST['includeBur']) || empty($_REQUEST['includeBur']))   $inclus = "null";
         else
           {
@@ -144,19 +98,7 @@ class GereTypeLogement {
 
       if(ISSET($_REQUEST['infoAutreBur'])) $infos = $_REQUEST['infoAutreBur'];
         else $infos = "null";
-
-      //$resultat = TRUE;
-      /*if ($identifiant == "") {
-          $_SESSION["messageErreurCreationCompte"]["identifiant"] = "Identifiant obligatoire";
-          $resultat = FALSE;
-      }*/
-      //if ($resultat) {
       $dao = new AnnonceBureauxDAO();
-         /* $annonce = $dao->findAnnonce($identifiant);
-          if ($annonce != NULL) {
-             $_SESSION["messageErreurCreationCompte"]["identifiant"] = "annonce déjà existante";
-             return FALSE;
-          }*/
       $annonceBureaux = new AnnonceBureaux();
       $annonceBureaux->setIdAnnonce($idannonce);
       $annonceBureaux->setTypeAnnonce($typeAnnonce);
@@ -167,10 +109,22 @@ class GereTypeLogement {
         $dao->createAnnonceBureaux($annonceBureaux);
       if($typetraitement == 'modification')
         $dao->modifierAnnonceBureaux($annonceBureaux);
-     // }
-      //return $resultat;
-      //pour les tests :
-      $_REQUEST['tabTest'] = $annonceBureaux;
       $_REQUEST['typetraitement']=$typetraitement;
   }
+
+  public static function supprimerUneAnnonceBureaux($idannonce) {
+    $dao = new AnnonceBureauxDAO();
+    $dao->supprimerAnnonceBureaux($idannonce);
+  }
+
+  public static function supprimerUneAnnonceMaison($idannonce) {
+    $dao = new AnnonceMaisonDAO();
+    $dao->supprimerAnnonceMaison($idannonce);
+  }
+
+  public static function supprimerUneAnnonceAppart($idannonce) {
+    $dao = new AnnonceAppartDAO();
+    $dao->supprimerAnnonceAppart($idannonce);
+  }
+
 }

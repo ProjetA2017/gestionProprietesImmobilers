@@ -93,7 +93,7 @@ class GereAnnonce {
         $_REQUEST['annonceAafficher'] = $dao->findAnnonceAvecType($idannonce, "annoncesbureaux");
       $daoImg = new ImagesDAO();
       $_REQUEST['imagesDeLannonce'] = $daoImg->findAllImagesUneAnnonce($idannonce);
-      //UNSET($_SESSION['PRG']);
+      //UNSET($_SESSION['PRG']);//Pour le PRG de l'envoi des messages
   }
 
     public static function chargerMarkersCarte() {
@@ -137,6 +137,11 @@ class GereAnnonce {
     			$dao = new AnnonceDAO();
     			$annonce = htmlspecialchars($_REQUEST["annonceASupprimer"]);
     			$dao->supprimerAnnonce($annonce);
+          GereTypeLogement::supprimerUneAnnonceMaison($annonce);
+          GereTypeLogement::supprimerUneAnnonceAppart($annonce);
+          GereTypeLogement::supprimerUneAnnonceBureaux($annonce);
+          $daoImg = new ImagesDAO();
+          $daoImg->deleteImage($annonce);
     		}
     }
 

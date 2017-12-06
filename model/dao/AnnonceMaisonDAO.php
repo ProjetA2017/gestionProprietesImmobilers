@@ -95,4 +95,20 @@ class AnnonceMaisonDAO {
 
             }
     }
+
+    public function supprimerAnnonceMaison($x) {
+      $db = Database::getInstance();
+      try
+      {
+        $request = "DELETE FROM annoncesmaison WHERE idannonce = '".$x."'";
+        return $db->exec($request);
+        $request->closeCursor();
+        $request = NULL;
+        Database::close();
+      }
+      catch(PDOException $e)
+      {
+        throw $e;
+      }
+    }
 }

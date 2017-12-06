@@ -89,7 +89,7 @@ class AnnonceDAO {
     }
   }
 
-  //markers Limités par la cle google
+  //markers Limités par la cle google à 18 ?????????
   public static function findAllMarkersAnnonces()
   {
     $db = Database::getInstance();
@@ -130,7 +130,6 @@ class AnnonceDAO {
     }
   }
 
-//TODO : à revoir utiliser peur être findAllAnnonces qui retourne un tableau
   public static function findAllAnnoncesListe()
   {
     $db = Database::getInstance();
@@ -215,7 +214,7 @@ class AnnonceDAO {
           }
   }
 
-  //TODO : A enlever, plus besoin => migrer dans ImagesDAO
+  //TODO : A enlever, plus besoin => migré dans ImagesDAO
   public static function uploaderImagesAnnonce($idImage, $idAnnonce,$filename,$path)
   {
           $db = Database::getInstance();
