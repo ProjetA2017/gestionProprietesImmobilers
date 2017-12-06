@@ -8,4 +8,3 @@ class ChercherAction implements Action {
 		return "chercher";
 	}
 }
-?>

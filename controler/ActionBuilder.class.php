@@ -1,38 +1,49 @@
 <?php
-require_once('./controler/AboutAction.class.php');
-require_once('./controler/AfficherCarteAction.class.php');
-require_once('./controler/AfficherEspaceMembreAction.class.php');
-require_once('./controler/AgentsAction.class.php');
-require_once('./controler/AjoutImagesAction.class.php');
-require_once('./controler/BlogAction.class.php');
-require_once('./controler/BlogDetailsAction.class.php');
-require_once('./controler/ChercherAction.class.php');
-require_once('./controler/ContactAction.class.php');
-require_once('./controler/CreationAnnonceAction.class.php');
-require_once('./controler/CreationCompteAction.class.php');
-require_once('./controler/DefaultAction.class.php');
-require_once('./controler/DetailsAction.class.php');
-require_once('./controler/FormulaireAnnonceAction.class.php');
-require_once('./controler/FormulaireCompteAction.class.php');
-require_once('./controler/FormulaireModifierAnnonceAction.class.php');
-require_once('./controler/LoginAction.class.php');
-require_once('./controler/LogoutAction.class.php');
-require_once('./controler/MarkersCarteAction.class.php');
-require_once('./controler/ModifierAnnonceAction.class.php');
-require_once('./controler/SupprimerAnnonceAction.class.php');
-require_once('./controler/UpdateMotDePasseAction.class.php');
-require_once('./controler/UpdateProfileAction.class.php');
-require_once('./controler/UploadImagesAction.class.php');
-require_once('./controler/TestAction.class.php');
+require_once ('./controler/AboutAction.class.php');
+require_once ('./controler/AccueilAction.class.php');
+require_once ('./controler/AfficherCarteAction.class.php');
+require_once ('./controler/AfficherEspaceMembreAction.class.php');
+require_once ('./controler/AgentsAction.class.php');
+require_once ('./controler/AfficherGaleryAction.class.php');
+require_once ('./controler/AjoutImagesAction.class.php');
+require_once ('./controler/BlogAction.class.php');
+require_once ('./controler/BlogDetailsAction.class.php');
+require_once ('./controler/ChercherAction.class.php');
+require_once ('./controler/ContactAction.class.php');
+require_once ('./controler/CreationAnnonceAction.class.php');
+require_once ('./controler/CreationCompteAction.class.php');
+require_once ('./controler/DefaultAction.class.php');
+require_once ('./controler/DetailsAction.class.php');
+require_once ('./controler/EnvoyerMessageAction.class.php');
+require_once ('./controler/FormulaireAnnonceAction.class.php');
+require_once ('./controler/FormulaireCompteAction.class.php');
+require_once ('./controler/FormulaireModifierAnnonceAction.class.php');
+require_once ('./controler/LoginAction.class.php');
+require_once ('./controler/LogoutAction.class.php');
+require_once ('./controler/MarkersCarteAction.class.php');
+require_once ('./controler/ModifierAnnonceAction.class.php');
+require_once ('./controler/SupprimerAnnonceAction.class.php');
+require_once ('./controler/SupprimerImageAction.class.php');
+require_once ('./controler/UpdateMotDePasseAction.class.php');
+require_once ('./controler/UpdateProfileAction.class.php');
+require_once ('./controler/UploadImagesAction.class.php');
+require_once ('./controler/TestAction.class.php');
+
 class ActionBuilder{
 	public static function getAction($nom){
 		switch ($nom)
 		{
+			case "pageAccueil" :
+				return new AccueilAction();
+			break;
 			case "afficherCarte" :
 				return new AfficherCarteAction();
 			break;
 			case "afficherEspaceMembre" :
 				return new AfficherEspaceMembreAction();
+			break;
+			case "afficherGalery" :
+				return new AfficherGaleryAction();
 			break;
 			case "ajouterImagesAnnonces" :
 				return new AjoutImagesAction();
@@ -51,6 +62,9 @@ class ActionBuilder{
 			break;
 			case "deconnection"  :
 				return new LogoutAction();
+			break;
+			case "envoyerMessage"  :
+				return new EnvoyerMessageAction();
 			break;
 			case "formulaireCompte" :
 				return new FormulaireCompteAction();
@@ -87,6 +101,9 @@ class ActionBuilder{
 			break;
 			case "supprimerAnnonce" :
 				return new SupprimerAnnonceAction();
+			break;
+			case "supprimerImage" :
+				return new SupprimerImageAction();
 			break;
 			case "uploaderImages" :
 				return new UploadImagesAction();

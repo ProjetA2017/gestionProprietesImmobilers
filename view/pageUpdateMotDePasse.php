@@ -4,7 +4,7 @@
 
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="index.php">Accueil</a></span>
+    <span class="pull-right"><a href="?action=pageAccueil">Accueil</a></span>
     <h2>Modifier Mot de Passe <?php echo '<span style="color:green;"><strong>'.$_SESSION["connected"].'</strong></span>';?></h2>
   </div>
 </div>
@@ -24,7 +24,7 @@
           </div>
           <button type="submit" class="btn btn-success" name="btnEnregistrerMdp" >Enregistrer</button>
         </form>
-        
+
       </div>
     </div>
   </div>

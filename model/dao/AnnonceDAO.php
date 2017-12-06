@@ -30,6 +30,7 @@ class AnnonceDAO {
           return NULL;
   }
 
+
   public static function findAnnonceAvecType($idannonce, $table)
   {
           $db = Database::getInstance();
@@ -72,7 +73,28 @@ class AnnonceDAO {
   {
     $db = Database::getInstance();
     try {
-      $requete = 'SELECT * FROM annonces';
+      $requete = 'SELECT * FROM annonces ORDER BY dateannonce DESC';
+      $pstmt = $db->query($requete);
+      $listeAnnonces = array();
+      foreach($pstmt as $row) {
+          array_push($listeAnnonces,$row);
+        }
+      $pstmt->closeCursor();
+      $pstmt = NULL;
+      Database::close();
+      return $listeAnnonces;
+    } catch (PDOException $e) {
+        print "Error!: ";// . $e->getMessage() . "<br/>";
+        return $listeAnnonces;
+    }
+  }
+
+  //markers Limités par la cle google
+  public static function findAllMarkersAnnonces()
+  {
+    $db = Database::getInstance();
+    try {
+      $requete = 'SELECT * FROM annonces ORDER BY dateannonce DESC LIMIT 18';
       $pstmt = $db->query($requete);
       $listeAnnonces = array();
       foreach($pstmt as $row) {
@@ -215,17 +237,17 @@ class AnnonceDAO {
 
     public static function chercherIdMarker($value)
     {
-      $x="";
+      $x="upload/imagesAnnonces/default.jpg";
       $db = Database::getInstance();
       try
       {
         $requete = "SELECT path FROM imgsannonces,annonces WHERE imgsannonces.idannonce = '$value' LIMIT 1 ";
         $pstmt = $db->query($requete);
-        if (!$pstmt) {
-            echo "rien";
-        }
-        foreach ($pstmt as $row) {
-            $x= $row['path'];
+        if ($pstmt){
+        //foreach ($pstmt as $row) {
+            $row = $pstmt->fetch();
+            $x = $row['path'];
+        //}
         }
         $pstmt->closeCursor();
         $pstmt = NULL;
@@ -290,13 +312,13 @@ class AnnonceDAO {
 
 
     //Utilisé pour la page recherche selon des critères et permettre la pagination
-    public static function getPage($numPage, $critere="toutes")
+    public static function getPage($numPage, $min, $max, $critere, $TAILLE_PAGE = 6)
     {
+          $crit = "location";
           $requete = "";
           $tableau = array();
           $listeAnnonces = array();
-          $TAILLE_PAGE = 5;
-          //$liste = new ListeAffichage();//array() au lieu de list
+          //$TAILLE_PAGE = 6;
           $debut = ($numPage - 1)*$TAILLE_PAGE;
           $pstmt = "";
           $afficher = "";
@@ -308,22 +330,32 @@ class AnnonceDAO {
             $db = Database::getInstance();
             switch ($afficher) {
                 case  "toutes" :
-                    $pstmtNbr = $db->query("SELECT COUNT(idannonce) AS nbrannonces FROM annonces");
+                    $pstmtNbr = $db->query("SELECT COUNT(idannonce) AS nbrannonces FROM annonces WHERE `prix` BETWEEN  '$min' AND '$max'");
                     $Nbr = $pstmtNbr->fetch();
                     $tableau['nbrDeResultat'] = $Nbr['nbrannonces'];
-                    $pstmt = $db->prepare('SELECT * FROM annonces
-                                           ORDER BY dateannonce DESC LIMIT '.$debut.', '.$TAILLE_PAGE);
+                    $pstmt = $db->prepare('SELECT * FROM annonces WHERE `prix` BETWEEN  '.$min.' AND '.$max.'
+                                       ORDER BY prix ASC LIMIT '.$debut.', '.$TAILLE_PAGE);
                     $pstmt->execute();
+                    //test
+                    $tableau['case']='toutes';
+                    $tableau['min']=$min;
+                    $tableau['max']=$max;
                 break;
 
                 case  "typeannonce" :
-                    $pstmtNbr = $db->query("SELECT COUNT(idannonce) AS nbrannonces
-                                            FROM annonces WHERE typeannonce  = '.$critere.'");
+                    $pstmtNbr = $db->query('SELECT COUNT(idannonce) AS nbrannonces
+                                            FROM annonces WHERE typeannonce = "'.$critere.'"
+                                            AND `prix` BETWEEN  "'.$min.'" AND "'.$max.'"');
                     $Nbr = $pstmtNbr->fetch();
                     $tableau['nbrDeResultat'] = $Nbr['nbrannonces'];
                     $pstmt = $db->prepare('SELECT * FROM annonces WHERE typeannonce = "'.$critere.'"
-                                           ORDER BY IDENTIFIANT ASC LIMIT '.$debut.', '.$TAILLE_PAGE);
+                                       AND `prix` BETWEEN  "'.$min.'" AND "'.$max.'"
+                                       ORDER BY prix ASC LIMIT '.$debut.', '.$TAILLE_PAGE);
                     $pstmt->execute();
+                    //test
+                    $tableau['case']='typeannonce';
+                    $tableau['min']=$min;
+                    $tableau['max']=$max;
                 break;
 
                 case  "date" :
@@ -350,23 +382,15 @@ class AnnonceDAO {
                 //default :
                     $pstmtNbr = $db->query("SELECT COUNT(IDENTIFIANT) AS NBRUTILISATEURS FROM user
                                             WHERE VISIBLE = 1 AND VILLE = '.$critere.'");
-                    $Nbr = $pstmtNbr->fetch();
+                  //  $Nbr = $pstmtNbr->fetch();
                     $tableau['nbrDeResultat'] = $Nbr['NBRUTILISATEURS'];
                     $pstmt = $db->prepare('SELECT * FROM user WHERE VISIBLE = 1 AND VILLE = :critere
                                  ORDER BY IDENTIFIANT ASC LIMIT '.$debut.', '.$TAILLE_PAGE);
                     $pstmt->execute(array(':critere' => htmlspecialchars($critere)));
             }
-
-             /*foreach($pstmt as $row) { //initial
-                $user = new Utilisateur();
-                $user->loadFromArray($row);
-                $liste->add($user);
-              }*/
               foreach($pstmt as $row) {
                   array_push($listeAnnonces,$row);
                 }
-              /*if($tableau['nbrDeResultat'] == 0)
-                $_SESSION["messagesNbrError"] = "0";*/
               $tableau['liste'] = $listeAnnonces;
               $pstmt->closeCursor();
               $pstmt = null;

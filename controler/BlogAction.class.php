@@ -6,4 +6,3 @@ class BlogAction implements Action {
 		return "blog";
 	}
 }
-?>

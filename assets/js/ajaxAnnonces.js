@@ -12,7 +12,7 @@ function init() {
     });
 }
 
-/*
+/* Création d'annonce avec AJAX
 document.getElementById("bCreationAnnonce").addEventListener("click", ajouterAnnonce);
 function ajouterAnnonce() {
     var lat = document.getElementById('lat').value;

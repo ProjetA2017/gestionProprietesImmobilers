@@ -4,7 +4,7 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="./">Accueil</a> / Mon espace</span>
+    <span class="pull-right"><a href="?action=pageAccueil">Accueil</a> / Mon espace</span>
     <h2>Mes annonces</h2>
 </div>
 </div>

@@ -2,7 +2,7 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="index.php">Accueil</a> / Blogs</span>
+    <span class="pull-right"><a href="?action=pageAccueil">Accueil</a> / Blogs</span>
     <h2>Blogs</h2>
 </div>
 </div>

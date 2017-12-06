@@ -38,6 +38,7 @@ class GereAnnonce {
          return FALSE;
       }*/
       $annonce = new Annonce();
+      $daoImg = new ImagesDAO();
       $annonce->setIdAnnonce($idannonce);
       $annonce->setIdAnnonceur($idannonceur);
       $annonce->setLatitude($lat);
@@ -49,38 +50,21 @@ class GereAnnonce {
       $annonce->setTypeAnnonce($typeAnnonce);
       $annonce->setTypeLogement($typeLogement);
       $dao->createAnnonce($annonce);
-
-      /* pour les tests TODO : enlever à la fin
-      $_SESSION['tabTest'] = array();
-      array_push($_SESSION['tabTest'] ,$idannonceur);
-      array_push($_SESSION['tabTest'] ,$lat);
-      array_push($_SESSION['tabTest'] ,$long);
-      array_push($_SESSION['tabTest'] ,$nom);
-      array_push($_SESSION['tabTest'] ,$prenom);
-      array_push($_SESSION['tabTest'] ,$adresse);
-      array_push($_SESSION['tabTest'] ,$prix);
-      array_push($_SESSION['tabTest'] ,$typeAnnonce);
-      array_push($_SESSION['tabTest'] ,$typeLogement);
-      array_push($_SESSION['tabTest'] ,$idannonce);
-      */
+      $daoImg->uploaderImagesAnnonce($idannonce, $idannonce,'default.jpg','upload/imagesAnnonces/default.jpg');
 
       $typetraitement = 'creation';
       if ($typeLogement == 'appartement'){
           GereTypeLogement::creerUneAnnonceAppart($idannonce, $typeAnnonce, $typetraitement);
-          //array_push($_SESSION['tabTest'] ,$typeLogement);
       }
 
       if ($typeLogement == 'maison'){
           GereTypeLogement::creerUneAnnonceMaison($idannonce, $typeAnnonce, $typetraitement);
-          //array_push($_SESSION['tabTest'] ,$typeLogement);
       }
 
       if ($typeLogement == 'bureaux'){
           GereTypeLogement::creerUneAnnonceBureaux($idannonce, $typeAnnonce, $typetraitement);
-          //array_push($_SESSION['tabTest'] ,$typeLogement);
       }
-      //UNSET($_REQUEST['typetraitement']);
-     // }
+      $_SESSION['lannonceIMG'] = $idannonce;
       //return $resultat;
   }
 
@@ -94,7 +78,10 @@ class GereAnnonce {
 
   public static function afficherDetailsUneAnnonce() {
       if (!ISSET($_SESSION)) session_start();
-      $idannonce=$_REQUEST['idannonce'];
+      if(ISSET($_REQUEST['idannonce']))
+        $idannonce=$_REQUEST['idannonce'];
+      else
+        $idannonce = $_SESSION['PRG'];
       $dao = new AnnonceDAO();
       $annonceAafficher = $dao->findAnnonce($idannonce);
       $_REQUEST['type'] = $annonceAafficher->getTypeLogement();
@@ -106,23 +93,22 @@ class GereAnnonce {
         $_REQUEST['annonceAafficher'] = $dao->findAnnonceAvecType($idannonce, "annoncesbureaux");
       $daoImg = new ImagesDAO();
       $_REQUEST['imagesDeLannonce'] = $daoImg->findAllImagesUneAnnonce($idannonce);
+      //UNSET($_SESSION['PRG']);
   }
 
     public static function chargerMarkersCarte() {
         $dao = new AnnonceDAO();
-        $lesAnnonces = $dao->findAllAnnonces();
-  //      $_SESSION['tab']=$lesAnnonces; // tests
-  //      $_SESSION['tab2'] = $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'); // tests
+        $lesAnnonces = $dao->findAllMarkersAnnonces();
         echo '<markers>';
         foreach ($lesAnnonces as $row){
+            $path = $dao->chercherIdMarker($row['idannonce']);
             echo '<marker ';
-            echo 'path="' . $dao->chercherIdMarker($row['idannonce']). '" ';
-            //echo 'path="' . $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'). '" ';//test
+            echo 'path="' . $path. '" ';
             echo 'lat="' . $row['latitude'] . '" ';
             echo 'lng="' . $row['longitude'] . '" ';
             echo 'name="' . Services::parseToXML($row['prenom']) . '" ';
             echo 'address="' . Services::parseToXML($row['adresse']) . '" ';
-            echo 'type="' . $row['prix'] . '" ';
+            echo 'prix="' . $row['prix'] . '" ';
             echo '/>';
         }
         // End XML file
@@ -132,17 +118,14 @@ class GereAnnonce {
     public static function chargerMarkersCarteUneAnnonce() {
         $dao = new AnnonceDAO();
         $annonce = $dao->findAnnonce($_SESSION['annonceAafficher']->idannonce);
-  //      $_SESSION['tab']=$lesAnnonces; // tests
-  //      $_SESSION['tab2'] = $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'); // tests
         echo '<markers>';
         echo '<marker ';
         echo 'path="' . $dao->chercherIdMarker($annonce->getIdAnnonce()). '" ';
-        //echo 'path="' . $dao->chercherIdMarker('yang-maison-40.90671500000001--73.89687600000002'). '" ';//test
         echo 'lat="' . $annonce->getLatitude() . '" ';
         echo 'lng="' . $annonce->getLongitude() . '" ';
         echo 'name="' . Services::parseToXML($annonce->getNom()) . '" ';
         echo 'address="' . Services::parseToXML($annonce->getAdresse()) . '" ';
-        echo 'type="' . $annonce->getPrix() . '" ';
+        echo 'prix="' . $annonce->getPrix() . '" ';
         echo '/>';
         // End XML file
         echo '</markers>';
@@ -186,31 +169,16 @@ class GereAnnonce {
         $annonce->setStatus($status);
         $annonce->setDateTraitement($dateTraitementAnnonce);
         $dao->modifierAnnonce($annonce);
-        //TODO : ENLEVER LE TEST
-        $_REQUEST['tabTest2'] = $annonce;
 
         $typetraitement = 'modification';
         if ($typeLogement == 'appartement'){
             GereTypeLogement::creerUneAnnonceAppart($idannonce, $typeAnnonce, $typetraitement);
-            //array_push($_SESSION['tabTest'] ,$typeLogement);
         }
-
         if ($typeLogement == 'maison'){
             GereTypeLogement::creerUneAnnonceMaison($idannonce, $typeAnnonce, $typetraitement);
-            //array_push($_SESSION['tabTest'] ,$typeLogement);
         }
-
         if ($typeLogement == 'bureaux'){
             GereTypeLogement::creerUneAnnonceBureaux($idannonce, $typeAnnonce, $typetraitement);
-            //array_push($_SESSION['tabTest'] ,$typeLogement);
         }
-        //UNSET($_REQUEST['typetraitement']);
-
-
-
       }
-
-
-
-
 }

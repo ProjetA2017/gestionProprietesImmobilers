@@ -1,11 +1,11 @@
 <?php include 'header.php';
-var_dump($_REQUEST['annonceAafficher']);
+//var_dump($_REQUEST['annonceAafficher']);
 //var_dump($_SESSION['testTab']);
 ?>
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="index.php">Accueil</a> / Modifier une annonce</span>
+    <span class="pull-right"><a href="?action=pageAccueil">Accueil</a> / Modifier une annonce</span>
     <h2>Modifier une annonce</h2>
 </div>
 </div>
@@ -82,7 +82,11 @@ $status = $_REQUEST['annonceAafficher']->status;
         </div>
         </form>
         <br />
-        <button type="submit" class="btn btn-success" name="bGalerieImages" id="bGalerieImage">Galerie Images</button>
+        <form role="form">
+          <input value="afficherGalery" name="action" type="hidden" />
+          <input type="hidden"  name="idannonce" id="idannonce" value="<?=$idannonce?>" />
+          <button type="submit" class="btn btn-success" name="bGalerieImages" id="bGalerieImages">Galerie Photos</button>
+        </form>
         <!--<input value="creerAnnonceAjax" name="action" type="hidden" />-->
 
       </div>

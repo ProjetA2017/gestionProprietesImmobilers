@@ -9,4 +9,3 @@ class DetailsAction implements Action {
 		//return "test";TODO: enlever les commentaires
 	}
 }
-?>

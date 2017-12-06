@@ -11,4 +11,3 @@ class CreationCompteAction implements Action {
     }
   }
 }
-?>

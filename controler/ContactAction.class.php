@@ -6,4 +6,3 @@ class ContactAction implements Action {
 		return "contact";
 	}
 }
-?>

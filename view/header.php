@@ -46,6 +46,8 @@
 
 <!-- Css ajouté par Yang -->
 <link rel="stylesheet" type="text/css" href="assets/css/styleYang.css">
+<!-- Css ajouté par Dris -->
+<link rel="stylesheet" type="text/css" href="assets/css/galery.css">
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 </head>
@@ -73,7 +75,7 @@
             <!-- Nav Starts -->
             <div class="navbar-collapse  collapse">
               <ul class="nav navbar-nav navbar-right">
-               <li class="active"><a href="?action=accueil">Home</a></li>
+               <li class="active"><a href="?action=pageAccueil">Home</a></li>
                 <li><a href="?action=pageAbout">À propos</a></li>
                 <li><a href="?action=pageAgents">Agents</a></li>
                 <li><a href="?action=pageBlog">Blogue</a></li>
@@ -92,11 +94,11 @@
 
 <!-- Header Starts -->
   <div class="header">
-    <a href="index.php"><img src="images/logo1.png" alt="Realestate"></a>
+    <a href="?action=pageAccueil"><img src="images/logo1.png" alt="Realestate"></a>
     <ul class="pull-right">
-      <li><a href="buysalerent.php">Acheter</a></li>
+      <li><a href="?action=pageChercher&typeannonce=vente&prixMin=0&prixMax=3000000">Acheter</a></li>
       <!--<li><a href="buysalerent.php">Vendre</a></li>-->
-      <li><a href="buysalerent.php">Louer</a></li>
+      <li><a href="?action=pageChercher&typeannonce=location&prixMin=0&prixMax=20000">Louer</a></li>
       <li>
       <div class="dropdown">
         <div data-toggle="dropdown">

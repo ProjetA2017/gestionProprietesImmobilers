@@ -1,12 +1,13 @@
 <?php include 'header.php';
-var_dump($_REQUEST['tabTest']);
+/*var_dump($_REQUEST['tabTest']);
 var_dump($_REQUEST['typetraitement']);
 var_dump($_REQUEST['tabTest2']);
+var_dump($_SESSION['img']);*/
 ?>
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="index.php">Accueil</a> / Créer une annonce</span>
+    <span class="pull-right"><a href="?action=pageAccueil">Accueil</a> / Créer une annonce</span>
     <h2>Ajouter des images à l'annonce</h2>
 </div>
 </div>
@@ -18,7 +19,11 @@ var_dump($_REQUEST['tabTest2']);
     <!--<input name="action" value="uploaderImages" type="hidden" />
     <button name="btnConfirm">Confirmer </button>-->
   </form>
-  <button class="btn btn-success" name="bAfficherEmplacement" id="bAfficherEmplacement" onclick="nonPhotos()">Afficher l'emplacement</button>
+  <form role="form">
+    <input value="afficherGalery" name="action" type="hidden" />
+    <input type="hidden"  name="idannonce" id="idannonce" value="<?=$_SESSION['lannonceIMG']?>" />
+    <button type="submit" class="btn btn-success" name="bGalerieImages" id="bGalerieImages">Galerie Photos</button>
+  </form>
 </div>
 
 <script>

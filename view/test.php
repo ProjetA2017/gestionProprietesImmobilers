@@ -4,5 +4,6 @@
 var_dump($_REQUEST['annonceAafficher']);
 var_dump($_REQUEST['imagesDeLannonce']);
 var_dump(count($_REQUEST['imagesDeLannonce']));*/
-var_dump($_SESSION['tabTest']);
+//var_dump($_SESSION['message']);
+var_dump($_REQUEST['idannonce']);
 ?>

@@ -6,4 +6,3 @@ class AgentsAction implements Action {
 		return "agents";
 	}
 }
-?>

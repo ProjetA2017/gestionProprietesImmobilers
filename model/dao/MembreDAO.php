@@ -51,4 +51,51 @@ public static function createMembre($membre)
         catch (PDOException $ex){
         }
 }
+
+public static function getCourriel($membre)
+{
+        $db = Database::getInstance();
+        try {
+          $pstmt = $db->prepare("SELECT `COURRIEL` FROM `membre` WHERE `IDENTIFIANT` = :courriel");
+          $pstmt->execute(array(':courriel' => htmlspecialchars($membre)));
+          $courriel = $pstmt->fetch();
+          $pstmt->closeCursor();
+          $pstmt = NULL;
+          Database::close();
+          return $courriel['COURRIEL'];
+        }
+        catch (PDOException $ex) {
+          return null;
+        }
+}
+
+public static function updateProfileMembre($user)
+{
+        $db = Database::getInstance();
+        try {
+            $pstmt = $db->prepare("UPDATE membre SET COURRIEL = :courriel,
+                                                   NOM = :nom,
+                                                   PRENOM = :prenom,
+                                                   ADRESSE = :adresse,
+                                                   VILLE = :ville,
+                                                   PAYS = :pays,
+                                                   TELEPHONE = :tel
+                                             WHERE IDENTIFIANT = :identifiant");
+            $pstmt->execute(array(':courriel' => htmlspecialchars($user->getCourriel()),
+                                  ':nom' => htmlspecialchars($user->getNom()),
+                                  ':prenom' => htmlspecialchars($user->getPrenom()),
+                                  ':adresse' => htmlspecialchars($user->getAdresse()),
+                                  ':ville' => htmlspecialchars($user->getVille()),
+                                  ':pays' => htmlspecialchars($user->getPays()),
+                                  ':tel' => htmlspecialchars($user->getTelephone()),
+                                  ':identifiant' => htmlspecialchars($user->getIdentifiant())
+                                ));
+            $pstmt->closeCursor();
+            $pstmt = NULL;
+            Database::close();
+        }
+        catch (PDOException $ex){
+        }
+}
+
 }

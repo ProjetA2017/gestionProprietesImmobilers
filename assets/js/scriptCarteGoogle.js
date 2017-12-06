@@ -1,12 +1,12 @@
 function initMap() {
-  alert('test');
+  //alert('test');
     var latitude = parseFloat(document.getElementById("afficheLatitude").value);
-    alert(latitude);
+  //  alert(latitude);
     var longitude = parseFloat(document.getElementById("afficheLongitude").value);
-    alert(longitude);
+//    alert(longitude);
     var zoomer = parseInt(document.getElementById("afficheZoom").value);
-    alert(zoomer);
-    alert(latitude + " et " + longitude + " et " + zoomer);
+//    alert(zoomer);
+//    alert(latitude + " et " + longitude + " et " + zoomer);
     var map = new google.maps.Map(document.getElementById('map'), {
         center: new google.maps.LatLng(latitude, longitude),
         zoom: zoomer
@@ -15,23 +15,23 @@ function initMap() {
 
     downloadUrl('?action=chargerMarkersCarte', function(data) {
         var xml = data.responseXML;
-        //alert(xml);//TODO : Enlever
+    //    alert(xml);//TODO : Enlever
         var markers = xml.documentElement.getElementsByTagName('marker');
         Array.prototype.forEach.call(markers, function(markerElem) {
             var name = markerElem.getAttribute('name');
             var address = markerElem.getAttribute('address');
-            var type = markerElem.getAttribute('type');
+            var prix = markerElem.getAttribute('prix');
             var point = new google.maps.LatLng(
                 parseFloat(markerElem.getAttribute('lat')),
                 parseFloat(markerElem.getAttribute('lng')));
-            var getpath=markerElem.getAttribute('path');// pour obtenir le path pour l image
+            var getpath=(markerElem.getAttribute('path') === "" ? "upload/imagesAnnonces/default.jpg" : markerElem.getAttribute('path'));// pour obtenir le path pour l image
             var infowincontent = document.createElement('div');
-            //alert(markers);//TODO : Enlever
+    //        alert(markers);//TODO : Enlever
             var textprix= document.createElement('strong');
             textprix.style.color='#f12b4a';
             textprix.fontWeight = "bolder";
             textprix.fontSize='900px';
-            textprix.textContent=type + '$ '; // on va changer le nom par prix
+            textprix.textContent=prix + '$ '; // on va changer le nom par prix
             infowincontent.appendChild(textprix);
             infowincontent.appendChild(document.createElement('br'));
 

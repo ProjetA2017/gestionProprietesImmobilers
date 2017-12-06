@@ -113,7 +113,7 @@ var_dump(count($listeInclus));*/
 			<label class="radio-inline"><input <?=$checked[2]?> type="radio" name="optNbrChambre" value="3"  style="float:right;"><span class="lbChambre">3 1/2</span></label>
 			<label class="radio-inline"><input <?=$checked[3]?> type="radio" name="optNbrChambre" value="4"  style="float:right;"><span class="lbChambre">4 1/2</span></label>
 			<label class="radio-inline"><input <?=$checked[4]?> type="radio" name="optNbrChambre" value="5"  style="float:right;"><span class="lbChambre">5 1/2</span></label>
-			<label class="radio-inline"><input <?=$checked[5]?> type="radio" name="optNbrChambre" value="6 et plus"  style="float:right;"><span class="lbChambre">6 1/2 ou plus</span></label>
+			<label class="radio-inline"><input <?=$checked[5]?> type="radio" name="optNbrChambre" value="6+"  style="float:right;"><span class="lbChambre">6 1/2 et plus</span></label>
 		</div>
 		<div class="form-inline">
 			<select class="form-control selectpicker" name = "position" id="etgApt">
@@ -180,7 +180,7 @@ var_dump(count($listeInclus));*/
 			<label class="radio-inline"><input <?=$checked[1]?> type="radio" name="nbrEmp" value="100"  style="float:right;">100</label>
 			<label class="radio-inline"><input <?=$checked[2]?> type="radio" name="nbrEmp" value="150"  style="float:right;">150</label>
 			<label class="radio-inline"><input <?=$checked[3]?> type="radio" name="nbrEmp" value="200"  style="float:right;">200</label>
-			<label class="radio-inline"><input <?=$checked[4]?> type="radio" name="nbrEmp" value="250 et plus"  style="float:right;">200+</label>
+			<label class="radio-inline"><input <?=$checked[4]?> type="radio" name="nbrEmp" value="250+"  style="float:right;">200 et plus</label>
 
 		</div>
 
@@ -248,7 +248,7 @@ var_dump(count($listeInclus));*/
 			<label class="radio-inline"><input <?=$checked[2]?> type="radio" name="nbrCh" value="3"  style="float:right;">3</label>
 			<label class="radio-inline"><input <?=$checked[3]?> type="radio" name="nbrCh" value="4"  style="float:right;">4</label>
 			<label class="radio-inline"><input <?=$checked[4]?> type="radio" name="nbrCh" value="5"  style="float:right;">5</label>
-			<label class="radio-inline"><input <?=$checked[5]?> type="radio" name="nbrCh" value="6 et plus"  style="float:right;">6 ou 6+</label>
+			<label class="radio-inline"><input <?=$checked[5]?> type="radio" name="nbrCh" value="6+"  style="float:right;">6 et plus</label>
 
 		</div>
 

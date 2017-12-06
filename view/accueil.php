@@ -33,15 +33,14 @@
 
 
 <!-- begin banner -->
-
 <div class="banner-search">
   <div class="container">
     <!-- banner -->
     <!--<h3>Recherche</h3>-->
     <div class="searchbar">
       <div class="row">
-        </div>
-        <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
+        <div class="col-lg-3 col-sm-3 "></div>
+        <div class="col-lg-6 col-sm-6 ">
           <?php
                if (!ISSET($_SESSION["membre"]))
                {
@@ -54,6 +53,8 @@
                  echo '<button type="submit" class="btn btn-info"  onclick="window.location.href=\'?action=formulaireAnnonce\'">Créer une annonce</button>';
                }
           ?>
+          </div>
+          <div class="col-lg-3 col-sm-3 "></div>
         </div>
       </div>
     </div>
@@ -64,13 +65,17 @@
     <div class="pull-right viewall">
       <div style="margin-right: 10px;">
     <a href="?action=afficherCarte"  id="spcTest"><span class="glyphicon glyphicon-map-marker" style="font-size: 1.6em; margin-right: 10px;"></span></a>
-    <a href="?action=pageChercher"  id="spcTest"><span class="glyphicon glyphicon-list" style="font-size: 1.6em;"></span></a>
+    <a href="?action=pageChercher&typeannonce=toutes&prixMin=0&prixMax=3000000"  id="spcTest"><span class="glyphicon glyphicon-list" style="font-size: 1.6em;"></span></a>
   </div>
   </div>
     <h2>Présentation des propriétés</h2>
     <div id="owl-example" class="owl-carousel">
 <?php foreach ($_SESSION['lesAnnonces'] as $row) {
-  $tatus = ($row['status']=='Disponble'?'status new':'status sold');
+  $tatus = ($row['status']=='Disponible'?'status sold':'status new');
+  if($row['status']=='Loué' || $row['status']=='vendu')
+    $tooltipTxt = $row['status'].' depuis : '.$row['datetraitementannonce'];
+  else
+    $tooltipTxt = 'Annonce diffusée depuis : '.$row['dateannonce'];
   $prix = ($row['typeannonce']=='location'?'$ par mois':'$');
 ?>
       <div class="properties">
@@ -80,7 +85,7 @@
         <h4><a href="?action=pageDetails">Compagnie Propriétés</a></h4>
         <p class="price">Prix : <?=number_format($row['prix'])?> <?=$prix?></p>
         <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typeannonce']?>">!</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$row['typelogement']?>">?</span>
-                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="Diffusée depuis : <?=$row['dateannonce']?>">*</span> </div>
+                                    <span data-toggle="tooltip" data-placement="bottom" data-original-title="<?=$tooltipTxt?>">*</span> </div>
         <a class="btn btn-primary" href="?action=pageDetails&idannonce=<?=$row['idannonce']?>">Voir les détails</a>
       </div>
 <?php } ?>

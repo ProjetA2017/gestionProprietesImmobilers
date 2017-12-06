@@ -2,7 +2,7 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="index.php">Accueil</a> / Créer une annonce</span>
+    <span class="pull-right"><a href="?action=pageAccueil">Accueil</a> / Créer une annonce</span>
     <h2>Créer une annonce</h2>
 </div>
 </div>

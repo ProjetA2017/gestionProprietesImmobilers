@@ -1,5 +1,5 @@
 <?php
-var_dump($_REQUEST['annonceAafficher']);
+//var_dump($_REQUEST['annonceAafficher']);
 include 'header.php';
 if(isset($_REQUEST['annonceAafficher'])) {
   $longitude = $_REQUEST['annonceAafficher']->longitude;
@@ -10,9 +10,9 @@ if(isset($_REQUEST['annonceAafficher'])) {
   $longitude = -73.58781;
   $zoom = 10;
 }
-var_dump($longitude);
+/*var_dump($longitude);
 var_dump($latitude);
-var_dump($zoom);
+var_dump($zoom);*/
 ?>
 <input type="hidden" id="afficheLatitude" value="<?=$latitude?>">
 <input type="hidden" id="afficheLongitude" value="<?=$longitude?>">
@@ -20,7 +20,7 @@ var_dump($zoom);
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="index.php">Accueil</a> / Détails propriété</span>
+    <span class="pull-right"><a href="?action=pageAccueil">Accueil</a> / Détails propriété</span>
     <h2>Détails propriété</h2>
 </div>
 </div>
@@ -70,7 +70,7 @@ var_dump($zoom);
               <li data-target="#myCarousel" data-slide-to="3" class=""></li>
             </ol>
             <div class="carousel-inner">
-              <?php if(count($_REQUEST['imagesDeLannonce'])) {
+              <?php if(count($_REQUEST['imagesDeLannonce']) > 0) {
                     $indice = 0;
                     foreach ($_REQUEST['imagesDeLannonce'] as $row) {
                     $image = ($row['idimage'] == NULL ? "default.jpg" : $row['idimage']);
@@ -90,7 +90,14 @@ var_dump($zoom);
             <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
           </div>
       <!-- #Slider Ends -->
-
+        </div>
+        <div>
+          <br />
+        <form role="form">
+          <input value="afficherGalery" name="action" type="hidden" />
+          <input type="hidden"  name="idannonce" id="idannonce" value="<?=$_REQUEST['annonceAafficher']->idannonce?>" />
+          <button type="submit" class="btn btn-success" name="bGalerieImages" id="bGalerieImages">Galerie Photos</button>
+        </form>
         </div>
 
 
@@ -139,14 +146,23 @@ var_dump($zoom);
       <div class="col-lg-12 col-sm-6 ">
       <div class="enquiry">
         <h6><span class="glyphicon glyphicon-envelope"></span> Contacter l'annonceur</h6>
-        <form role="form">
-                      <input type="text" class="form-control" placeholder="Nom complet"/>
-                      <input type="text" class="form-control" placeholder="Votre courriel"/>
-                      <input type="text" class="form-control" placeholder="Votre numéero de téléphone"/>
-                      <textarea rows="6" class="form-control" placeholder="Message"></textarea>
-            <button type="submit" class="btn btn-primary" name="Submit">Envoyer un message</button>
-            </form>
+        <form role="form" method = "post">
+                      <input name="action" value="envoyerMessage" type="hidden" />
+                      <input name="idannonce" value="<?=$_REQUEST['annonceAafficher']->idannonce?>" type="hidden" />
+                      <input name="identifiant" value="<?=$_REQUEST['annonceAafficher']->idannonceur?>" type="hidden" />
+                      <input type="text" class="form-control" name="nomcomplet" placeholder="Nom complet"/ required="required">
+                      <input type="email" class="form-control" name="courriel" placeholder="Votre courriel" required="required"/>
+                      <input type="text" class="form-control" name="tel" placeholder="Votre numéro de téléphone" required="required"/>
+                      <textarea rows="6" class="form-control" name = "message" placeholder="Message"></textarea>
+            <button type="submit" class="btn btn-primary" name="bEnvoyerMessageAnnonceur">Envoyer un message</button>
+        </form><br />
        </div>
+         <?php if (ISSET($_SESSION["messagesSucces"])) { ?>
+               <div class="alert alert-success alert-dismissable">
+                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                     <p class="panel-body"><?=$_SESSION["messagesSucces"]?></p>
+               </div>
+         <?php UNSET($_SESSION["messagesSucces"]); } ?>
       </div>
         </div>
       </div>

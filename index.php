@@ -19,6 +19,6 @@ else
 			if ($action instanceof RequirePRGAction) {
 					header("Location: ?action=".$vue);
 			} else {
-				include_once('view/'.$vue.'.php');
+				include_once ('view/'.$vue.'.php');
 			}
 	}
