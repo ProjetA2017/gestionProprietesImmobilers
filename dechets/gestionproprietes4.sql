@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 06 Décembre 2017 à 14:54
+-- Généré le :  Mar 05 Décembre 2017 à 20:25
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -179,8 +179,6 @@ INSERT INTO `imgsannonces` (`id`, `idimage`, `idannonce`, `filename`, `path`) VA
 (40, 'ali_maison_45.53604600000001_-73.56078000000002', 'ali_maison_45.53604600000001_-73.56078000000002', 'default.jpg', 'upload/imagesAnnonces/default.jpg'),
 (5, 'dris_appartement_45.4873249_-73.57843960000002_test16.jpg', 'dris_appartement_45.4873249_-73.57843960000002', 'test16.jpg', 'upload/imagesAnnonces/dris_appartement_45.4873249_-73.57843960000002_test16.jpg'),
 (6, 'dris_appartement_45.4873249_-73.57843960000002_test17.jpg', 'dris_appartement_45.4873249_-73.57843960000002', 'test17.jpg', 'upload/imagesAnnonces/dris_appartement_45.4873249_-73.57843960000002_test17.jpg'),
-(58, 'dris_appartement_45.4873249_-73.57843960000002_test18.jpg', 'dris_appartement_45.4873249_-73.57843960000002', 'test18.jpg', 'upload/imagesAnnonces/dris_appartement_45.4873249_-73.57843960000002_test18.jpg'),
-(59, 'dris_appartement_45.4873249_-73.57843960000002_test19.jpg', 'dris_appartement_45.4873249_-73.57843960000002', 'test19.jpg', 'upload/imagesAnnonces/dris_appartement_45.4873249_-73.57843960000002_test19.jpg'),
 (7, 'dris_appartement_45.5933212_-73.55793069999999_test21.jpg', 'dris_appartement_45.5933212_-73.55793069999999', 'test21.jpg', 'upload/imagesAnnonces/dris_appartement_45.5933212_-73.55793069999999_test21.jpg'),
 (8, 'dris_appartement_45.5933212_-73.55793069999999_test22.jpg', 'dris_appartement_45.5933212_-73.55793069999999', 'test22.jpg', 'upload/imagesAnnonces/dris_appartement_45.5933212_-73.55793069999999_test22.jpg'),
 (11, 'dris_bureaux_45.474928_-73.603654_test33.jpg', 'dris_bureaux_45.474928_-73.603654', 'test33.jpg', 'upload/imagesAnnonces/dris_bureaux_45.474928_-73.603654_test33.jpg'),
@@ -199,7 +197,6 @@ INSERT INTO `imgsannonces` (`id`, `idimage`, `idannonce`, `filename`, `path`) VA
 (48, 'gilberto_maison_45.441185_-73.47341799999998_test5.jpg', 'gilberto_maison_45.441185_-73.47341799999998', 'test5.jpg', 'upload/imagesAnnonces/gilberto_maison_45.441185_-73.47341799999998_test5.jpg'),
 (45, 'gilberto_maison_45.519367_-73.56795599999998_test1.jpg', 'gilberto_maison_45.519367_-73.56795599999998', 'test1.jpg', 'upload/imagesAnnonces/gilberto_maison_45.519367_-73.56795599999998_test1.jpg'),
 (46, 'gilberto_maison_45.519367_-73.56795599999998_test2.jpg', 'gilberto_maison_45.519367_-73.56795599999998', 'test2.jpg', 'upload/imagesAnnonces/gilberto_maison_45.519367_-73.56795599999998_test2.jpg'),
-(57, 'yang_appartement_45.54014040000001_-73.670275_test177.jpg', 'yang_appartement_45.54014040000001_-73.670275', 'test177.jpg', 'upload/imagesAnnonces/yang_appartement_45.54014040000001_-73.670275_test177.jpg'),
 (21, 'yang_appartement_45.54014040000001_-73.670275_test22.jpg', 'yang_appartement_45.54014040000001_-73.670275', 'test22.jpg', 'upload/imagesAnnonces/yang_appartement_45.54014040000001_-73.670275_test22.jpg'),
 (22, 'yang_appartement_45.54014040000001_-73.670275_test23.jpg', 'yang_appartement_45.54014040000001_-73.670275', 'test23.jpg', 'upload/imagesAnnonces/yang_appartement_45.54014040000001_-73.670275_test23.jpg'),
 (19, 'yang_appartement_45.5569997_-73.56653790000001_imgAppRedim1.jpg', 'yang_appartement_45.5569997_-73.56653790000001', 'imgAppRedim1.jpg', 'upload/imagesAnnonces/yang_appartement_45.5569997_-73.56653790000001_imgAppRedim1.jpg'),
@@ -239,14 +236,13 @@ CREATE TABLE `membre` (
 INSERT INTO `membre` (`ID_INCREMENTE`, `IDENTIFIANT`, `MOTDEPASSE`, `COURRIEL`, `NOM`, `PRENOM`, `ADRESSE`, `VILLE`, `PAYS`, `TELEPHONE`) VALUES
 (5, 'ali', '$2y$10$35xuFD0sCl21AeVuZlj.PuCWWwDH.tjklhbTp0WtKJUfFQ4pCfjqa', 'ali@yahoo.fr', 'ali', 'ali', NULL, NULL, NULL, NULL),
 (6, 'brian', '$2y$10$mufgKTkBUQOSV6fkw6rdlOSgf48GCTsVBI5UsNlexN79Os/jww7TW', 'brian@gmail.com', 'brain', 'inthekitchen', NULL, NULL, NULL, NULL),
-(1, 'dris', '$2y$10$ABMmDLTOIlnRT.DNqTt/veF037gbDA/eiSqrZ9doFI3J8ojWWIeMG', 'dris@hotmail.com', 'amarray', 'dris', '5645 Rue Saint-Denis, MontrÃ©al, QC, Canada', 'Montreal', 'Canada', '66666666'),
+(1, 'dris', '$2y$10$ABMmDLTOIlnRT.DNqTt/veF037gbDA/eiSqrZ9doFI3J8ojWWIeMG', 'dris@yahoo.fr', 'amarray', 'dris', NULL, NULL, NULL, NULL),
 (3, 'gilberto', '$2y$10$qKM2GxdmvMhaC4QfzoZrk..t5HcWjotEl06eUedEGlSNJDCRRP7ce', 'gilberto@yahoo.ca', 'ramos', 'gilberto', NULL, NULL, NULL, NULL),
 (8, 'kjhkjh', '$2y$10$3/W38Akn5J6czuPKbTXhEOecO7DMf14TevCPlf6YnWTT/NO8/jF52', 'qqwdqwd@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 'lucien', '$2y$10$okpR1x.9mPoYz38a1A7v6.rJAmQs62ENX3a9VACGYYEFzSi1rd0Ca', 'lucien@yahoo.fr', 'lucien', 'lucien', NULL, NULL, NULL, NULL),
 (11, 'man', '$2y$10$pGLS/Gag.LUwOuwFwXSCfOHASUhmtrTItFQ4ml4G4nh0Uk5l48Rgm', 'man@yahoo.fr', NULL, NULL, NULL, NULL, NULL, NULL),
 (9, 'paul', '$2y$10$8NzDabfUAMizADHDY3Q/4uj5RPdeADhxLonUE6FSleCybYAd.GkMe', 'paul@yahoo.fr', 'paul', 'paul', NULL, NULL, NULL, NULL),
 (14, 'qqqqqq', '$2y$10$LF9rY.8dy2ZW8EN63OoEs.nzIBmkRAJOVENVkNtPvJu7CzIXhbctG', 'q@q.com', 'q', 'q', NULL, NULL, NULL, NULL),
-(15, 'steve', '$2y$10$4oOx1UmY.3OXYFlojTUEM.l20mQGd7tHKWa4/bqascCmoeD1BSF5u', 'steve@yahoo.fr', 'steve', 'steve', NULL, NULL, NULL, NULL),
 (12, 'test1', '$2y$10$jVlv7fpKr6fXlj6CYbnwX.uHhE6qVPY7v1rcvWjXGS5CaqM0NujkK', 'test1@yahoo.fr', 'test1', 'test1', NULL, NULL, NULL, NULL),
 (13, 'test2', '$2y$10$9UYmzvdis3X/6gajoU1foOo.Rs4deAswmmJ5/REcj9gt88IbcCrtu', 'test2@yahoo.fr', 'test2', 'test2', NULL, NULL, NULL, NULL),
 (7, 'toto', '$2y$10$z.3xGYKOaptM3l9zOywb9.tqdX02QczPNd.qW.fkCWli4XynzQS2K', 'toto@gmail.com', 'toto', 'toto', NULL, NULL, NULL, NULL),
@@ -266,28 +262,8 @@ CREATE TABLE `messagerie` (
   `nomcomplet` varchar(250) NOT NULL,
   `courriel` varchar(250) NOT NULL,
   `tel` varchar(15) NOT NULL,
-  `message` text NOT NULL,
-  `datemessage` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `messagerie`
---
-
-INSERT INTO `messagerie` (`id`, `idmessage`, `idannonceur`, `courrielannonceur`, `nomcomplet`, `courriel`, `tel`, `message`, `datemessage`) VALUES
-(13, 'admin_dris@gmail.fr_2017-12-06 09:44:05', 'admin', 'comptedetudiant@gmail.com', 'dris amarray', 'dris@gmail.fr', '222222222', 'message admin', '2017-12-06 14:44:05'),
-(12, 'ali_man@yahoo.fr_2017-12-06 09:43:20', 'ali', 'ali@yahoo.fr', 'nnnnn', 'man@yahoo.fr', 'man', 'man', '2017-12-06 14:43:20'),
-(1, 'dris@gmail.fr_2017-12-06 07:57:48', 'dris', 'dris@hotmail.com', 'dris amarray', 'dris@gmail.fr', '8888888', 'message de la part de dris', '2017-12-06 12:57:48'),
-(2, 'dris@gmail.fr_2017-12-06 08:08:43', 'ali', 'ali@yahoo.fr', 'dris amarray', 'dris@gmail.fr', '123456789', 'deuxiÃ¨me message', '2017-12-06 13:08:43'),
-(3, 'dris@gmail.fr_2017-12-06 08:16:05', 'ali', 'ali@yahoo.fr', 'dris amarray', 'dris@gmail.fr', '123456789', 'deuxiÃ¨me message', '2017-12-06 13:16:05'),
-(4, 'dris@gmail.fr_2017-12-06 08:17:02', 'ali', 'ali@yahoo.fr', 'dris amarray', 'dris@gmail.fr', '123456789', 'deuxiÃ¨me message', '2017-12-06 13:17:02'),
-(5, 'dris@gmail.fr_2017-12-06 08:27:04', 'gilberto', 'gilberto@yahoo.ca', 'dris amarray', 'dris@gmail.fr', 'ddddd', 'dddddd', '2017-12-06 13:27:04'),
-(7, 'dris@gmail.fr_2017-12-06 08:47:36', 'gilberto', 'gilberto@yahoo.ca', 'dris amarray', 'dris@gmail.fr', 'ddddd', '34534534wewertert', '2017-12-06 13:47:36'),
-(9, 'dris@gmail.fr_2017-12-06 09:03:42', 'gilberto', 'gilberto@yahoo.ca', 'dfgd', 'dris@gmail.fr', 'fghfgh', 'fghfghfghfgh', '2017-12-06 14:03:42'),
-(6, 'dris@hotmail.com_2017-12-06 08:42:29', 'gilberto', 'gilberto@yahoo.ca', 'dris amarray', 'dris@hotmail.com', '123456789', 'sdfgsdfgsdfgsdfgsdfg', '2017-12-06 13:42:29'),
-(10, 'dris@hotmail.com_2017-12-06 09:04:45', 'gilberto', 'gilberto@yahoo.ca', 'ytwerwer', 'dris@hotmail.com', '12214234', '123412341234123412341234', '2017-12-06 14:04:45'),
-(11, 'gilberto@yahoo.ca_2017-12-06 09:23:05', 'ali', 'ali@yahoo.fr', 'dris amarray', 'gilberto@yahoo.ca', 'rer', 'ert', '2017-12-06 14:23:05'),
-(8, 'vvv@ddd.com_2017-12-06 08:52:20', 'gilberto', 'gilberto@yahoo.ca', 'vvv', 'vvv@ddd.com', 'vvv', 'vvvvv', '2017-12-06 13:52:20');
 
 --
 -- Index pour les tables exportées
@@ -370,17 +346,17 @@ ALTER TABLE `annoncesmaison`
 -- AUTO_INCREMENT pour la table `imgsannonces`
 --
 ALTER TABLE `imgsannonces`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `ID_INCREMENTE` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_INCREMENTE` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `messagerie`
 --
 ALTER TABLE `messagerie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
